@@ -10,6 +10,26 @@ export const DRINK_TYPES = [
 
 export type DrinkType = (typeof DRINK_TYPES)[number];
 
+// 日本酒の特定名称酒
+export const SAKE_TYPES = [
+  '純米大吟醸',
+  '大吟醸',
+  '純米吟醸',
+  '吟醸',
+  '特別純米',
+  '純米',
+  '特別本醸造',
+  '本醸造',
+  '普通酒',
+  'にごり酒',
+  '生酒',
+  '原酒',
+  'スパークリング',
+  'その他',
+] as const;
+
+export type SakeType = (typeof SAKE_TYPES)[number];
+
 export interface DrinkRecord {
   id: string;
   date: string; // YYYY-MM-DD
@@ -19,6 +39,7 @@ export interface DrinkRecord {
   photo_url: string | null;
   note: string | null;
   volume_ml: number;
+  sake_type?: string | null; // 日本酒の特定名称酒
   created_at: string;
 }
 
@@ -34,6 +55,8 @@ export const DRINK_STYLES: Record<DrinkType, DrinkStyle[]> = {
   'ビール': [
     { label: '中ジョッキ', unit_ml: 435, max_count: 5 },
     { label: '瓶ビール', unit_ml: 500, max_count: 5 },
+    { label: '350ml缶', unit_ml: 350, max_count: 5 },
+    { label: '500ml缶', unit_ml: 500, max_count: 5 },
   ],
   'ウィスキー': [
     { label: 'シングル', unit_ml: 30, max_count: 1 },
@@ -61,5 +84,7 @@ export const DRINK_STYLES: Record<DrinkType, DrinkStyle[]> = {
   ],
   'サワー': [
     { label: '1杯', unit_ml: 350, max_count: 5 },
+    { label: '350ml缶', unit_ml: 350, max_count: 5 },
+    { label: '500ml缶', unit_ml: 500, max_count: 5 },
   ],
 };

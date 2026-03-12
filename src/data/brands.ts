@@ -8,9 +8,9 @@ export interface BrandOption {
   brand: string;  // 代表銘柄
 }
 
-export const BRAND_SELECTABLE_TYPES = ['ビール', 'ジン', '日本酒', '焼酎', 'ウィスキー'] as const;
+export const BRAND_SELECTABLE_TYPES = ['ビール', 'ジン', '日本酒', '焼酎', 'ウィスキー', 'ワイン'] as const;
 
-export type DrinkType = '日本酒' | 'ビール' | 'ジン' | '焼酎' | 'ウィスキー';
+export type DrinkType = '日本酒' | 'ビール' | 'ジン' | '焼酎' | 'ウィスキー' | 'ワイン';
 
 // 全47都道府県（北から南の順）
 export const PREFECTURES = [
@@ -60,6 +60,9 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '二世古酒造', brand: '二世古' },
       { maker: '国稀酒造', brand: '国稀' },
       { maker: '三千櫻酒造', brand: '三千櫻' },
+      { maker: '上川大雪酒造', brand: '上川大雪' },
+      { maker: '碓氷勝三郎商店', brand: '北の誉' },
+      { maker: '箱館醸蔵', brand: '郷宝' },
     ],
 
     // -------------------------------------------------------
@@ -76,6 +79,8 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: 'カネタ玉田酒造店', brand: '華一風' },
       { maker: '竹浪酒造店', brand: '岩木正宗' },
       { maker: '尾崎酒造', brand: '安東水軍' },
+      { maker: '六花酒造', brand: 'じょっぱり' },
+      { maker: '関乃井酒造', brand: '関乃井' },
     ],
     '岩手県': [
       { maker: '南部美人', brand: '南部美人' },
@@ -88,6 +93,9 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '磐乃井酒造', brand: '磐乃井' },
       { maker: '月の輪酒造店', brand: '月の輪' },
       { maker: '廣田酒造店', brand: '廣喜' },
+      { maker: '吾妻嶺酒造店', brand: '吾妻嶺' },
+      { maker: '岩手銘醸', brand: '岩手誉' },
+      { maker: '喜久盛酒造', brand: 'タクシードライバー' },
     ],
     '宮城県': [
       { maker: '新澤醸造店', brand: '伯楽星' },
@@ -114,6 +122,10 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '秋田酒類製造', brand: '高清水' },
       { maker: '出羽鶴酒造', brand: '出羽鶴' },
       { maker: '福禄寿酒造', brand: '一白水成' },
+      { maker: '飛良泉本舗', brand: '飛良泉' },
+      { maker: '秋田清酒', brand: '刈穂' },
+      { maker: '浅舞酒造', brand: '天の戸' },
+      { maker: 'まんさくの花 日の丸醸造', brand: 'まんさくの花' },
     ],
     '山形県': [
       { maker: '高木酒造', brand: '十四代' },
@@ -128,6 +140,10 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '後藤酒造店', brand: '辯天' },
       { maker: '秀鳳酒造場', brand: '秀鳳' },
       { maker: '鯉川酒造', brand: '鯉川' },
+      { maker: '男山酒造', brand: '羽陽男山' },
+      { maker: '和田酒造', brand: 'あら玉' },
+      { maker: '六歌仙', brand: '六歌仙' },
+      { maker: '千代寿虎屋', brand: '千代寿' },
     ],
     '福島県': [
       { maker: '廣木酒造本店', brand: '飛露喜' },
@@ -142,6 +158,10 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '国権酒造', brand: '国権' },
       { maker: '鶴乃江酒造', brand: '会津中将' },
       { maker: '曙酒造', brand: '天明' },
+      { maker: '仁井田本家', brand: '穏' },
+      { maker: '榮川酒造', brand: '榮川' },
+      { maker: '大木代吉本店', brand: '自然郷' },
+      { maker: '山口合名会社', brand: '会津吉の川' },
     ],
 
     // -------------------------------------------------------
@@ -250,6 +270,28 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '加茂錦酒造', brand: '加茂錦' },
       { maker: 'DHC酒造', brand: '越乃梅里' },
       { maker: '玉川酒造', brand: '玉風味' },
+      { maker: '今代司酒造', brand: '今代司' },
+      { maker: '越後鶴亀', brand: '越後鶴亀' },
+      { maker: '白瀧酒造', brand: '上善如水' },
+      { maker: '緑川酒造', brand: '緑川' },
+      { maker: '大洋酒造', brand: '大洋盛' },
+      { maker: '長谷川酒造', brand: '越後雪紅梅' },
+      { maker: '新潟銘醸', brand: '越の寒中梅' },
+      { maker: '田中酒造', brand: '能鷹' },
+      { maker: '原酒造', brand: '越の誉' },
+      { maker: '越銘醸', brand: '越の鶴' },
+      { maker: '池浦酒造', brand: '和楽互尊' },
+      { maker: '鮎正宗酒造', brand: '鮎正宗' },
+      { maker: '頚城酒造', brand: '越路乃紅梅' },
+      { maker: '市島酒造', brand: '王紋' },
+      { maker: '尾畑酒造', brand: '真野鶴' },
+      { maker: '逸見酒造', brand: '真稜' },
+      { maker: '北雪酒造', brand: '北雪' },
+      { maker: '渡辺酒造店', brand: '根知男山' },
+      { maker: 'こしのはくせつ（弥彦酒造）', brand: '弥彦' },
+      { maker: '笹祝酒造', brand: '笹祝' },
+      { maker: '村祐酒造', brand: '村祐' },
+      { maker: 'ふじの井酒造', brand: 'ふじの井' },
     ],
     '富山県': [
       { maker: '桝田酒造店', brand: '満寿泉' },
@@ -262,6 +304,8 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '皇国晴酒造', brand: '幻の瀧' },
       { maker: '千代鶴酒造', brand: '千代鶴' },
       { maker: '福鶴酒造', brand: '風の盆' },
+      { maker: '高澤酒造場', brand: '有磯曙' },
+      { maker: '吉江酒造', brand: '太刀山' },
     ],
     '石川県': [
       { maker: '福光屋', brand: '加賀鳶' },
@@ -274,6 +318,9 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '松浦酒造', brand: '獅子の里' },
       { maker: '鶴野酒造店', brand: '谷泉' },
       { maker: '白藤酒造店', brand: '奥能登の白菊' },
+      { maker: '中村酒造', brand: '日榮' },
+      { maker: '御祖酒造', brand: '遊穂' },
+      { maker: '鹿野酒造', brand: '常きげん' },
     ],
     '福井県': [
       { maker: '黒龍酒造', brand: '黒龍' },
@@ -311,6 +358,13 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '黒澤酒造', brand: '黒澤' },
       { maker: '岡崎酒造', brand: '信州亀齢' },
       { maker: '田中屋酒造店', brand: '水尾' },
+      { maker: '湯川酒造店', brand: '十六代九郎右衛門' },
+      { maker: '豊島屋', brand: '神渡' },
+      { maker: '丸世酒造店', brand: '勢正宗' },
+      { maker: '仙醸', brand: '黒松仙醸' },
+      { maker: '古屋酒造店', brand: '深志鶴' },
+      { maker: '戸塚酒造店', brand: '寒竹' },
+      { maker: '福源酒造', brand: '福源' },
     ],
     '岐阜県': [
       { maker: '三千盛', brand: '三千盛' },
@@ -335,6 +389,8 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '杉井酒造', brand: '杉錦' },
       { maker: '富士高砂酒造', brand: '高砂' },
       { maker: '神沢川酒造場', brand: '正雪' },
+      { maker: '大村屋酒造場', brand: 'おんな泣かせ' },
+      { maker: '青島酒造', brand: '喜久醉' },
     ],
     '愛知県': [
       { maker: '萬乗醸造', brand: '醸し人九平次' },
@@ -347,6 +403,8 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '東春酒造', brand: '東龍' },
       { maker: '澤田酒造', brand: '白老' },
       { maker: '長珍酒造', brand: '長珍' },
+      { maker: '中澤酒造', brand: '菊石' },
+      { maker: '鶴見酒造', brand: '我山' },
     ],
 
     // -------------------------------------------------------
@@ -363,6 +421,8 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '河武醸造', brand: '鉾杉' },
       { maker: '寒紅梅酒造', brand: '寒紅梅' },
       { maker: '大田酒造', brand: '半蔵' },
+      { maker: '福持酒造場', brand: '鉾の蔵' },
+      { maker: '伊藤酒造', brand: '鈿女' },
     ],
     '滋賀県': [
       { maker: '冨田酒造', brand: '七本鎗' },
@@ -388,6 +448,9 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '木下酒造', brand: '玉川' },
       { maker: '羽田酒造', brand: '初日の出' },
       { maker: '東山酒造', brand: '坤滴' },
+      { maker: '丹山酒造', brand: '丹山' },
+      { maker: '向井酒造', brand: '京の春' },
+      { maker: '白杉酒造', brand: '白木久' },
     ],
     '大阪府': [
       { maker: '秋鹿酒造', brand: '秋鹿' },
@@ -413,6 +476,11 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '山陽盃酒造', brand: '播州一献' },
       { maker: '下村酒造店', brand: '奥播磨' },
       { maker: '太陽酒造', brand: '赤石' },
+      { maker: '日本盛', brand: '日本盛' },
+      { maker: '小西酒造', brand: '白雪' },
+      { maker: '都美人酒造', brand: '都美人' },
+      { maker: '名城酒造', brand: '名城' },
+      { maker: '福寿酒造（神戸酒心館）', brand: '福寿' },
     ],
     '奈良県': [
       { maker: '今西酒造', brand: 'みむろ杉' },
@@ -490,6 +558,9 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '中尾醸造', brand: '誠鏡' },
       { maker: '藤井酒造', brand: '龍勢' },
       { maker: '白牡丹酒造', brand: '白牡丹' },
+      { maker: '盛川酒造', brand: '白鴻' },
+      { maker: '福美人酒造', brand: '福美人' },
+      { maker: '三輪酒造', brand: '神雷' },
     ],
     '山口県': [
       { maker: '旭酒造', brand: '獺祭' },
@@ -502,6 +573,9 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '山縣本店', brand: '毛利公' },
       { maker: '金光酒造', brand: '山頭火' },
       { maker: '中島屋酒造場', brand: 'カネナカ' },
+      { maker: '新谷酒造', brand: 'わかむすめ' },
+      { maker: '山口酒造場', brand: '天美' },
+      { maker: '下関酒造', brand: '関娘' },
     ],
 
     // -------------------------------------------------------
@@ -571,6 +645,9 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '比翼鶴酒造', brand: '比翼鶴' },
       { maker: '花の露', brand: '花の露' },
       { maker: '旭菊酒造', brand: '旭菊' },
+      { maker: '三井の寿', brand: '三井の寿' },
+      { maker: '池亀酒造', brand: '池亀' },
+      { maker: '小林酒造本店', brand: '萬代' },
     ],
     '佐賀県': [
       { maker: '天山酒造', brand: '七田' },
@@ -583,6 +660,9 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '馬場酒造場', brand: '能古見' },
       { maker: '古伊万里酒造', brand: '古伊万里' },
       { maker: '大和酒造', brand: '肥前蔵心' },
+      { maker: '光武酒造場', brand: '光武' },
+      { maker: '五町田酒造', brand: '東一' },
+      { maker: '窓乃梅酒造', brand: '窓乃梅' },
     ],
     '長崎県': [
       { maker: '福田酒造', brand: '福田' },
@@ -677,6 +757,10 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '薄野地麦酒', brand: '薄野ビール' },
       { maker: '旭川大雪地ビール', brand: '大雪ケルシュ' },
       { maker: 'フラノブルワリー', brand: 'フラノビール' },
+      { maker: '月と太陽BREWING', brand: '月と太陽' },
+      { maker: '忽布古丹醸造', brand: '忽布古丹' },
+      { maker: 'ふかがわブルワリー', brand: 'ふかがわビール' },
+      { maker: '函館ビヤホール（BAYはこだて）', brand: '函館ビール' },
     ],
 
     // -------------------------------------------------------
@@ -687,6 +771,8 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: 'Be Easy Brewing', brand: 'ペイペイエール' },
       { maker: 'みちのく地ビール', brand: 'みちのくビール' },
       { maker: 'Garutsu Brewing', brand: 'ガルツビール' },
+      { maker: '津軽路ビール（あすなろ乳業）', brand: '津軽路ビール' },
+      { maker: 'ブリューイングプロジェクト弘前', brand: '弘前シードルビール' },
     ],
     '岩手県': [
       { maker: 'ベアレン醸造所', brand: 'ベアレンクラシック' },
@@ -694,6 +780,7 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '遠野醸造', brand: '遠野醸造ビール' },
       { maker: 'ブリューイングベース一関', brand: 'さくらエール' },
       { maker: '三陸ビール', brand: '三陸ビール' },
+      { maker: '銀河高原ビール', brand: '銀河高原ビール' },
     ],
     '宮城県': [
       { maker: 'やくらいビール', brand: 'やくらいビール' },
@@ -701,18 +788,23 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '鳴子温泉ブルワリー', brand: '鳴子の風' },
       { maker: '松島ビール', brand: '松島ビール' },
       { maker: '仙台マイクロブルワリー', brand: '仙台ビール' },
+      { maker: 'Sendai Brewing Lab', brand: 'センダイブルーイングラボ' },
+      { maker: '穀町ビール', brand: '穀町ビール' },
     ],
     '秋田県': [
       { maker: '秋田あくらビール', brand: 'あくらビール' },
       { maker: '田沢湖ビール', brand: '田沢湖ビール' },
       { maker: 'ブルーマスター', brand: 'なまはげIPA' },
       { maker: '湖畔の杜ビール', brand: '湖畔の杜ビール' },
+      { maker: 'クラフトマンブルワリー横手', brand: '横手ビール' },
     ],
     '山形県': [
       { maker: '月山ビール', brand: '月山ビール' },
       { maker: '米沢ジャックスブルワリー', brand: '米沢エール' },
       { maker: '東根フルーツビール', brand: 'さくらんぼビール' },
       { maker: '山形ブルワリー', brand: '山形ビール' },
+      { maker: 'STING Brewery', brand: 'スティングビール' },
+      { maker: '酒田麦酒', brand: '酒田ビール' },
     ],
     '福島県': [
       { maker: '猪苗代地ビール', brand: '猪苗代地ビール' },
@@ -720,6 +812,8 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '会津麦酒', brand: '会津麦酒' },
       { maker: '南会津マウンテンブルーイング', brand: '南会津ラガー' },
       { maker: 'みちのく福島路ビール', brand: 'ピーチエール' },
+      { maker: 'Tap&Growler', brand: 'タップ＆グロウラー' },
+      { maker: '郡山ブルワリー', brand: '郡山ビール' },
     ],
 
     // -------------------------------------------------------
@@ -730,17 +824,22 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: 'シャトーカミヤ', brand: '牛久ビール' },
       { maker: 'つくばクラフトビア', brand: 'つくばエール' },
       { maker: 'さかい河岸ブルワリー', brand: 'さかい河岸ビール' },
+      { maker: 'パーソナルブルーイング', brand: 'パーソナルビール' },
+      { maker: '笠間ブルワリー', brand: '笠間ビール' },
     ],
     '栃木県': [
       { maker: 'ろまんちっく村ブルワリー', brand: '餃子浪漫' },
       { maker: 'うしとらブルワリー', brand: 'うしとらビール' },
       { maker: 'ブリューイング那須', brand: '那須ビール' },
       { maker: 'Circular Brewing', brand: 'サーキュラービール' },
+      { maker: '栃木マイクロブルワリー', brand: '大谷石エール' },
     ],
     '群馬県': [
       { maker: '川場ビール', brand: '川場ビール' },
       { maker: '嬬恋高原ブルワリー', brand: '嬬恋ビール' },
       { maker: '月夜野クラフトビール', brand: '月夜野ビール' },
+      { maker: 'CARVAAN Brewery', brand: 'カールヴァーンビール' },
+      { maker: '田園プラザかわば', brand: '川場ヴァイツェン' },
     ],
     '埼玉県': [
       { maker: 'コエドブルワリー', brand: 'COEDO' },
@@ -785,20 +884,25 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: 'スワンレイクビール', brand: 'スワンレイクビール' },
       { maker: '胎内高原ビール', brand: '吟籠IPA' },
       { maker: '八海醸造', brand: 'ライディーンビール' },
+      { maker: 'ミツケローカルブルワリー', brand: '見附ビール' },
+      { maker: 'Niigata Brewing', brand: '新潟麦酒' },
     ],
     '富山県': [
       { maker: '城端麦酒', brand: '城端麦酒' },
       { maker: '宇奈月ビール', brand: '宇奈月ビール' },
       { maker: '立山ブルワリー', brand: '立山ビール' },
+      { maker: '氷見ブルーイング', brand: '氷見ビール' },
     ],
     '石川県': [
       { maker: 'わくわくブルワリー', brand: '金澤麦酒' },
       { maker: '能登ブルーイング', brand: '能登エール' },
       { maker: 'オリエンタルブルーイング', brand: 'オリエンタルビール' },
+      { maker: '加賀棒茶ビール（丸八製茶場）', brand: '加賀棒茶スタウト' },
     ],
     '福井県': [
       { maker: '越の磯', brand: '越前福井浪漫麦酒' },
       { maker: 'ZEN BREWING', brand: 'ZENビール' },
+      { maker: '恐竜ビール（福井県立大学連携）', brand: 'ダイナソーエール' },
     ],
     '山梨県': [
       { maker: '富士桜高原麦酒', brand: '富士桜高原麦酒' },
@@ -819,6 +923,8 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '飛騨高山麦酒', brand: '飛騨高山麦酒' },
       { maker: '地ビール飛騨', brand: '飛騨ビール' },
       { maker: '郡上八幡麦酒こぼこぼ', brand: 'こぼこぼビール' },
+      { maker: '関ブルワリー', brand: '関ビール' },
+      { maker: '各務原ブルワリー', brand: '各務原ビール' },
     ],
     '静岡県': [
       { maker: 'ベアードビール', brand: 'ベアードビール' },
@@ -826,12 +932,17 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '御殿場高原ビール', brand: '御殿場高原ビール' },
       { maker: 'West Coast Brewing', brand: 'WCB' },
       { maker: 'Repubrew', brand: 'リパブリュー' },
+      { maker: 'AOI BREWING', brand: 'AOIビール' },
+      { maker: '伊豆の国ビール', brand: '伊豆の国ビール' },
+      { maker: 'IZU BREWING', brand: '伊豆ブルーイング' },
     ],
     '愛知県': [
       { maker: '盛田金しゃちビール', brand: '金しゃちビール' },
       { maker: 'ワイマーケットブルーイング', brand: 'ワイマーケット' },
       { maker: 'カブトビール（半田赤レンガ建物）', brand: 'カブトビール' },
       { maker: 'ブルワリーレストランORIZON', brand: 'ORIZONビール' },
+      { maker: 'Craft Beer Server Land', brand: 'ランドビール' },
+      { maker: '犬山ローレライ麦酒館', brand: '犬山ビール' },
     ],
 
     // -------------------------------------------------------
@@ -840,37 +951,49 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     '三重県': [
       { maker: '伊勢角屋麦酒', brand: '伊勢角屋麦酒' },
       { maker: 'モクモクブルワリー', brand: 'モクモクビール' },
+      { maker: '二軒茶屋餅角屋本店', brand: '神都麦酒' },
+      { maker: '四日市ブルワリー', brand: '四日市ビール' },
     ],
     '滋賀県': [
       { maker: '長浜浪漫ビール', brand: '長浜エール' },
       { maker: 'TWO RABBITS BREWING', brand: 'ツーラビッツ' },
+      { maker: 'BIWAKO BREWING', brand: 'びわ湖ビール' },
+      { maker: 'ヒノブルーイング', brand: 'ヒノビール' },
     ],
     '京都府': [
       { maker: 'キンシ正宗', brand: '京都町家麦酒' },
       { maker: '黄桜', brand: '京都麦酒' },
       { maker: 'ウッドミルブルワリー', brand: 'ウッドミル' },
       { maker: 'スプリングバレーブルワリー京都', brand: 'SVB京都' },
+      { maker: '丹後王国ブルワリー', brand: '丹後クラフトビール' },
+      { maker: 'Kyoto Brewing Co.', brand: '京都ブルーイング' },
     ],
     '大阪府': [
       { maker: '箕面ビール', brand: '箕面ビール' },
       { maker: 'マーカスブルワリー', brand: 'マーカスビール' },
       { maker: 'Derailleur Brew Works', brand: 'デライユ' },
       { maker: 'CRAFT BEER BASE', brand: 'CBBビール' },
+      { maker: 'MARCA Brewing', brand: 'マルカビール' },
+      { maker: '中之島ブルーイング', brand: '中之島ビール' },
     ],
     '兵庫県': [
       { maker: 'あわぢびーる', brand: 'あわぢびーる' },
       { maker: '六甲ビール', brand: '六甲ビール' },
       { maker: 'KONISHIビール（小西酒造）', brand: 'KONISHIビール' },
       { maker: '城崎ビール', brand: '城崎ビール' },
+      { maker: '明石ブルワリー', brand: '明石ビール' },
+      { maker: 'IRIE BREWING', brand: 'アイリービール' },
     ],
     '奈良県': [
       { maker: '奈良醸造', brand: 'ならまちエール' },
       { maker: '曽爾高原ビール', brand: '曽爾高原ビール' },
       { maker: 'ゴールデンラビットビール', brand: 'ゴールデンラビット' },
+      { maker: 'なら麦酒ならまち醸造所', brand: 'ならまち麦酒' },
     ],
     '和歌山県': [
       { maker: 'ボイジャーブルーイング', brand: 'ボイジャービール' },
       { maker: 'ナギサビール', brand: 'ナギサビール' },
+      { maker: 'NOMCRAFT Brewing', brand: 'ノムクラフト' },
     ],
 
     // -------------------------------------------------------
@@ -879,23 +1002,30 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     '鳥取県': [
       { maker: '大山Gビール（久米桜酒造）', brand: '大山Gビール' },
       { maker: '鳥取砂丘ブルワリー', brand: '砂丘ビール' },
+      { maker: '倉吉ビール（地ビールたまがわ）', brand: '倉吉ビール' },
     ],
     '島根県': [
       { maker: 'ビアへるん（島根ビール）', brand: 'ビアへるん' },
       { maker: '石見麦酒', brand: '石見麦酒' },
+      { maker: '松江ビアへるん', brand: '松江ビール' },
     ],
     '岡山県': [
       { maker: '宮下酒造', brand: '独歩ビール' },
       { maker: '吉備土手下麦酒', brand: '吉備土手下麦酒' },
+      { maker: 'OKAYAMA KOBO Brewery', brand: '岡山工房ビール' },
+      { maker: '蒜山高原ビール', brand: '蒜山ビール' },
     ],
     '広島県': [
       { maker: '三次ベッケンビール', brand: 'ベッケンビール' },
       { maker: '宮島ビール', brand: '宮島ビール' },
       { maker: 'Hiroshima Neighborly Brewing', brand: 'HNBビール' },
+      { maker: '呉ビール', brand: '海軍さんの麦酒' },
+      { maker: 'HIROSHIMA NEIGHBORLY BREWING', brand: 'HNBペールエール' },
     ],
     '山口県': [
       { maker: '萩ビール', brand: 'ちょんまげビール' },
       { maker: 'やまぐち地ビール', brand: 'やまぐちビール' },
+      { maker: '下関ブルワリー', brand: '関門ビール' },
     ],
 
     // -------------------------------------------------------
@@ -904,18 +1034,24 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     '徳島県': [
       { maker: 'RISE & WIN Brewing', brand: 'KAMIKATZ' },
       { maker: 'Awa新町ブルワリー', brand: '阿波麦酒' },
+      { maker: '鳴門ブルワリー', brand: '鳴門ビール' },
     ],
     '香川県': [
       { maker: 'さぬきビール', brand: 'さぬきビール' },
       { maker: 'まめまめビール', brand: 'まめまめビール' },
+      { maker: '小豆島ビール', brand: '小豆島ビール' },
+      { maker: '直島ビール', brand: '直島ビール' },
     ],
     '愛媛県': [
       { maker: '梅錦ビール', brand: '梅錦ビール' },
       { maker: 'DD4D BREWING', brand: 'DD4D' },
+      { maker: '道後ビール（水口酒造）', brand: '道後ビール' },
+      { maker: '今治ブルワリー', brand: '今治ビール' },
     ],
     '高知県': [
       { maker: 'TOSACO（高知カンパーニュブルワリー）', brand: 'TOSACO' },
       { maker: 'Mukai Craft Brewing', brand: 'ムカイクラフト' },
+      { maker: 'ブリュードッグよさこい', brand: 'よさこいビール' },
     ],
 
     // -------------------------------------------------------
@@ -926,31 +1062,42 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: 'FUKUOKA CRAFT', brand: 'FUKUOKA CRAFT' },
       { maker: '門司港レトロビール', brand: '門司港ビール' },
       { maker: 'ヤフオクドーム醸造所（ホークスビール）', brand: 'ホークスラガー' },
+      { maker: '糸島ブルワリー', brand: '糸島ビール' },
+      { maker: 'Mugen Brewery', brand: '無限ビール' },
+      { maker: 'ブルーマスター福岡', brand: '博多エール' },
     ],
     '佐賀県': [
       { maker: '宗政酒造', brand: 'のまんばビール' },
       { maker: '嬉野温泉ブルワリー', brand: '嬉野ビール' },
+      { maker: '佐賀ブルーイング', brand: '佐賀ビール' },
     ],
     '長崎県': [
       { maker: '雲仙ブルワリー', brand: '雲仙ビール' },
       { maker: '壱岐麦酒', brand: '壱岐ゴールド' },
+      { maker: '長崎街道ビール', brand: 'ながさきビール' },
+      { maker: '波佐見ブルーイング', brand: '波佐見ビール' },
     ],
     '熊本県': [
       { maker: '熊本クラフトビール', brand: '熊本クラフト' },
       { maker: '阿蘇ファームブルワリー', brand: '阿蘇ビール' },
+      { maker: 'Voyager Brewing 熊本', brand: '熊本ヴォイジャー' },
+      { maker: '通潤橋ブルワリー', brand: '通潤橋ビール' },
     ],
     '大分県': [
       { maker: '別府ブルワリー', brand: '別府エール' },
       { maker: 'くじゅう高原ビール', brand: 'くじゅうビール' },
+      { maker: '由布院ビール', brand: '由布院ビール' },
     ],
     '宮崎県': [
       { maker: 'ひでじビール', brand: 'ひでじビール' },
       { maker: '青島ブルワリー', brand: '青島ビール' },
+      { maker: '日向夏ビール（宮崎ひでじビール）', brand: '日向夏ラガー' },
     ],
     '鹿児島県': [
       { maker: '城山ブルワリー', brand: '城山ビール' },
       { maker: '霧島高原ビール', brand: '霧島高原ビール' },
       { maker: '薩摩麦酒', brand: '薩摩ゴールド' },
+      { maker: '奄美ブルワリー', brand: '奄美ビール' },
     ],
     '沖縄県': [
       { maker: 'オリオンビール', brand: 'オリオンビール' },
@@ -958,6 +1105,8 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
       { maker: '石垣島ビール', brand: '石垣島ビール' },
       { maker: '沖縄サンゴビール', brand: 'サンゴビール' },
       { maker: '南都酒造所', brand: 'OKINAWA SANGO BEER' },
+      { maker: '宮古島マイクロブルワリー', brand: '宮古島ビール' },
+      { maker: 'CHATAN HARBOR BREWERY', brand: '北谷ビール' },
     ],
   },
 
@@ -1026,6 +1175,22 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     // -------------------------------------------------------
     '新潟県': [
       { maker: '越乃米蔵', brand: '越乃米蔵' },
+      { maker: '八海醸造', brand: 'よろしく千萬あるべし' },
+    ],
+    '富山県': [
+      { maker: '若鶴酒造', brand: '砺波野' },
+    ],
+    '石川県': [
+      { maker: '福光屋', brand: '風よ水よ人よ' },
+    ],
+    '福井県': [
+      { maker: '黒龍酒造', brand: '九頭龍焼酎' },
+    ],
+    '山梨県': [
+      { maker: 'サントリー', brand: 'だいやめ' },
+    ],
+    '岐阜県': [
+      { maker: '三千盛', brand: '三千盛焼酎' },
     ],
     '長野県': [
       { maker: '喜久水酒造', brand: '喜久水そば焼酎' },
@@ -1044,6 +1209,9 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     '三重県': [
       { maker: '宮崎本店', brand: 'キンミヤ焼酎' },
       { maker: '清水清三郎商店', brand: '作 本格焼酎' },
+    ],
+    '滋賀県': [
+      { maker: '藤居本家', brand: '琵琶の長寿焼酎' },
     ],
     '京都府': [
       { maker: '宝酒造', brand: 'よかいち' },
@@ -1251,9 +1419,11 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     ],
     '岩手県': [
       { maker: '赤武酒造', brand: 'クラフトジン清庵' },
+      { maker: '南部美人', brand: '南部美人ジン' },
     ],
     '宮城県': [
       { maker: '伊達醸造所', brand: '欅 KEYAKI' },
+      { maker: '仙台伊澤家 勝山酒造', brand: '勝山ジン' },
     ],
     '秋田県': [
       { maker: '秋田蒸溜所', brand: '秋田杉GIN' },
@@ -1261,9 +1431,11 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     ],
     '山形県': [
       { maker: '月山酒造', brand: '月山ジン' },
+      { maker: '楯の川酒造', brand: '楯野川ジン' },
     ],
     '福島県': [
       { maker: '笹の川酒造', brand: '安積蒸溜所ジン' },
+      { maker: '花春酒造', brand: '会津ジン' },
     ],
 
     // -------------------------------------------------------
@@ -1271,18 +1443,23 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     // -------------------------------------------------------
     '茨城県': [
       { maker: '木内酒造', brand: '常陸野ハンドメイドジン' },
+      { maker: '明利酒類', brand: '水戸ジン' },
     ],
     '栃木県': [
       { maker: 'アール蒸溜所', brand: 'クラフトジン日光' },
+      { maker: '外池酒造', brand: '益子ジン' },
     ],
     '群馬県': [
       { maker: '土田酒造', brand: '土田ジン' },
+      { maker: '聖酒造', brand: '利根ジン' },
     ],
     '埼玉県': [
       { maker: '麻原酒造', brand: '武州クラフトジン' },
+      { maker: 'ベンチャーウイスキー（秩父蒸溜所）', brand: '秩父ジン' },
     ],
     '千葉県': [
       { maker: 'ミツバ蒸溜所', brand: 'MITSUBEE GIN' },
+      { maker: '飯沼本家', brand: '甲子ジン' },
     ],
     '東京都': [
       { maker: 'エシカル・スピリッツ', brand: '東京リバーサイド蒸溜所ジン' },
@@ -1291,6 +1468,7 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     ],
     '神奈川県': [
       { maker: '熊澤酒造', brand: '湘南クラフトジン' },
+      { maker: '横浜蒸留所', brand: 'ヨコハマジン' },
     ],
 
     // -------------------------------------------------------
@@ -1303,12 +1481,18 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     ],
     '富山県': [
       { maker: '若鶴酒造', brand: 'T&T TOYAMA GIN' },
+      { maker: '桝田酒造店', brand: '満寿泉ジン' },
     ],
     '石川県': [
       { maker: '数馬酒造', brand: '能登ジン' },
+      { maker: '吉田酒造店', brand: '手取川ジン' },
+    ],
+    '福井県': [
+      { maker: '黒龍酒造', brand: '九頭龍ジン' },
     ],
     '山梨県': [
       { maker: 'ドメーヌ・デ・テンプリエ', brand: '甲斐ジン' },
+      { maker: 'サントリー白州蒸溜所', brand: '白州ジン' },
     ],
     '長野県': [
       { maker: 'マルス信州蒸溜所（本坊酒造）', brand: '和美人ジン信州' },
@@ -1316,6 +1500,7 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     ],
     '岐阜県': [
       { maker: '辰巳蒸留所', brand: 'クラフトジン飛騨' },
+      { maker: '千代菊', brand: '美濃ジン' },
     ],
     '静岡県': [
       { maker: 'ガイアフロー静岡蒸溜所', brand: '静岡ドライジン' },
@@ -1448,6 +1633,9 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     // -------------------------------------------------------
     // 東北
     // -------------------------------------------------------
+    '青森県': [
+      { maker: '八戸蒸溜所', brand: '八戸ウイスキー' },
+    ],
     '岩手県': [
       { maker: '南部美人', brand: '南部美人ウイスキー' },
     ],
@@ -1486,6 +1674,10 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     ],
     '東京都': [
       { maker: '東京ウイスキー＆スピリッツ', brand: '東京ウイスキー' },
+      { maker: '羽生蒸溜所（東亜酒造東京工場）', brand: '東京ブレンド' },
+    ],
+    '神奈川県': [
+      { maker: '横浜蒸留所', brand: '横浜ウイスキー' },
     ],
 
     // -------------------------------------------------------
@@ -1546,6 +1738,9 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     '奈良県': [
       { maker: '油長酒造（大和蒸溜所）', brand: '橘花ウイスキー' },
     ],
+    '和歌山県': [
+      { maker: '平和酒造（平和蒸溜所）', brand: '紀州ウイスキー' },
+    ],
 
     // -------------------------------------------------------
     // 中国
@@ -1570,6 +1765,9 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     // -------------------------------------------------------
     // 四国
     // -------------------------------------------------------
+    '徳島県': [
+      { maker: '日新酒類', brand: '阿波ウイスキー' },
+    ],
     '香川県': [
       { maker: '小豆島蒸溜所', brand: '小豆島ウイスキー' },
     ],
@@ -1585,6 +1783,9 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     // -------------------------------------------------------
     '福岡県': [
       { maker: '小正嘉之助蒸溜所（福岡工場）', brand: '嘉之助 福岡' },
+    ],
+    '佐賀県': [
+      { maker: '宗政酒造（蔵蒸溜所）', brand: '佐賀ウイスキー' },
     ],
     '長崎県': [
       { maker: '壱岐の蔵酒造', brand: '壱岐ウイスキー' },
@@ -1605,6 +1806,253 @@ export const BRAND_DATA: Record<DrinkType, Partial<Record<Prefecture, BrandOptio
     ],
     '沖縄県': [
       { maker: 'ヘリオス酒造', brand: '暦' },
+    ],
+  },
+
+  // ============================================================
+  // ワイン（日本ワイン）
+  // ============================================================
+  'ワイン': {
+
+    // -------------------------------------------------------
+    // 北海道
+    // -------------------------------------------------------
+    '北海道': [
+      { maker: 'ドメーヌ・タカヒコ', brand: 'ナナツモリ' },
+      { maker: '10Rワイナリー', brand: '10R' },
+      { maker: 'さっぽろ藤野ワイナリー', brand: '藤野ワイン' },
+      { maker: '余市ワイナリー', brand: '余市ワイン' },
+      { maker: 'OcciGabi Winery', brand: 'オチガビワイン' },
+      { maker: '千歳ワイナリー', brand: '北ワイン' },
+      { maker: 'キャメルファームワイナリー', brand: 'キャメルファーム' },
+      { maker: 'リタファーム＆ワイナリー', brand: 'リタファーム' },
+      { maker: '平川ワイナリー', brand: '平川ワイン' },
+      { maker: 'NIKI Hills Winery', brand: 'ニキヒルズ' },
+      { maker: '山﨑ワイナリー', brand: '山﨑ワイン' },
+      { maker: 'はこだてわいん', brand: 'はこだてわいん' },
+      { maker: 'ふらのワイン', brand: 'ふらのワイン' },
+    ],
+
+    // -------------------------------------------------------
+    // 東北
+    // -------------------------------------------------------
+    '青森県': [
+      { maker: 'サンマモルワイナリー', brand: 'サンマモル' },
+      { maker: '下北ワイン（サンマモルワイナリー）', brand: '下北ワイン' },
+    ],
+    '岩手県': [
+      { maker: 'エーデルワイン', brand: 'エーデルワイン' },
+      { maker: '紫波フルーツパーク', brand: '紫波ワイン' },
+      { maker: 'くずまきワイン', brand: 'くずまきワイン' },
+    ],
+    '宮城県': [
+      { maker: '秋保ワイナリー', brand: '秋保ワイン' },
+      { maker: '了美ワイナリー', brand: '了美ワイン' },
+    ],
+    '秋田県': [
+      { maker: 'ワイナリーこのはな', brand: 'このはなワイン' },
+      { maker: '小坂七滝ワイナリー', brand: '小坂ワイン' },
+    ],
+    '山形県': [
+      { maker: '高畠ワイナリー', brand: '高畠ワイン' },
+      { maker: 'タケダワイナリー', brand: 'タケダワイン' },
+      { maker: '月山ワイン', brand: '月山ワイン' },
+      { maker: '朝日町ワイン', brand: '朝日町ワイン' },
+      { maker: '天童ワイン', brand: '天童ワイン' },
+      { maker: 'ウッディファーム＆ワイナリー', brand: 'ウッディファーム' },
+    ],
+    '福島県': [
+      { maker: 'ふくしま逢瀬ワイナリー', brand: '逢瀬ワイン' },
+      { maker: 'ハッピーワイナリー', brand: 'ハッピーワイン' },
+    ],
+
+    // -------------------------------------------------------
+    // 関東
+    // -------------------------------------------------------
+    '茨城県': [
+      { maker: '牛久シャトー', brand: '牛久ワイン' },
+      { maker: 'つくばワイナリー', brand: 'つくばワイン' },
+    ],
+    '栃木県': [
+      { maker: 'ココ・ファーム・ワイナリー', brand: 'ココ・ファーム' },
+      { maker: '大平ぶどう園', brand: '大平ワイン' },
+    ],
+    '群馬県': [
+      { maker: '奥利根ワイナリー', brand: '奥利根ワイン' },
+    ],
+    '埼玉県': [
+      { maker: '秩父ファーマーズファクトリー', brand: '兎田ワイン' },
+    ],
+    '千葉県': [
+      { maker: '齊藤ぶどう園', brand: '齊藤ワイン' },
+    ],
+    '東京都': [
+      { maker: '深川ワイナリー', brand: '深川ワイン' },
+      { maker: 'BookRoad', brand: 'ブックロードワイン' },
+      { maker: '東京ワイナリー', brand: '東京ワイン' },
+    ],
+    '神奈川県': [
+      { maker: '横濱ワイナリー', brand: '横濱ワイン' },
+    ],
+
+    // -------------------------------------------------------
+    // 中部
+    // -------------------------------------------------------
+    '新潟県': [
+      { maker: 'カーブドッチワイナリー', brand: 'カーブドッチ' },
+      { maker: 'フェルミエ', brand: 'フェルミエ' },
+      { maker: '岩の原葡萄園', brand: '岩の原ワイン' },
+      { maker: 'ドメーヌ・ショオ', brand: 'ショオ' },
+    ],
+    '富山県': [
+      { maker: 'ホーライサンワイナリー', brand: 'ホーライサン' },
+      { maker: 'SAYS FARM', brand: 'セイズファーム' },
+    ],
+    '石川県': [
+      { maker: 'ハイディワイナリー', brand: 'ハイディ' },
+    ],
+    '福井県': [
+      { maker: '白山ワイナリー', brand: '白山ワイン' },
+    ],
+    '山梨県': [
+      { maker: 'グレイスワイン（中央葡萄酒）', brand: 'グレイスワイン' },
+      { maker: 'シャトー・メルシャン', brand: 'シャトー・メルシャン' },
+      { maker: 'サントリー登美の丘ワイナリー', brand: '登美' },
+      { maker: 'マンズワイン（キッコーマン）', brand: 'ソラリス' },
+      { maker: '勝沼醸造', brand: 'アルガブランカ' },
+      { maker: 'ルミエール', brand: 'ルミエール' },
+      { maker: '丸藤葡萄酒工業', brand: 'ルバイヤート' },
+      { maker: 'ドメーヌ・Q', brand: 'ドメーヌQ' },
+      { maker: 'くらむぼんワイン', brand: 'くらむぼん' },
+      { maker: 'ダイヤモンド酒造', brand: 'シャンテ' },
+      { maker: 'サドヤ', brand: 'サドヤ' },
+      { maker: '機山洋酒工業', brand: '機山ワイン' },
+      { maker: 'MGVs（マグヴィス）ワイナリー', brand: 'MGVs' },
+      { maker: '白百合醸造', brand: 'ロリアン' },
+      { maker: '盛田甲州ワイナリー', brand: 'シャンモリ' },
+      { maker: '98WINEs', brand: '98ワインズ' },
+    ],
+    '長野県': [
+      { maker: 'ヴィラデストワイナリー', brand: 'ヴィラデスト' },
+      { maker: '小布施ワイナリー', brand: 'ドメーヌ・ソガ' },
+      { maker: 'シャトー・メルシャン桔梗ヶ原', brand: '桔梗ヶ原メルロー' },
+      { maker: 'マンズワイン小諸ワイナリー', brand: 'ソラリス信州' },
+      { maker: 'リュードヴァン', brand: 'リュードヴァン' },
+      { maker: 'サンサンワイナリー', brand: 'サンサン' },
+      { maker: 'ドメーヌ・コーセイ', brand: 'コーセイ' },
+      { maker: 'はすみふぁーむ', brand: 'はすみふぁーむ' },
+      { maker: '安曇野ワイナリー', brand: '安曇野ワイン' },
+      { maker: '井筒ワイン', brand: '井筒ワイン' },
+      { maker: '五一わいん', brand: '五一わいん' },
+      { maker: 'アルプス', brand: 'アルプスワイン' },
+      { maker: '信州たかやまワイナリー', brand: 'たかやま' },
+    ],
+    '岐阜県': [
+      { maker: '天領ワイン', brand: '天領ワイン' },
+    ],
+    '静岡県': [
+      { maker: '中伊豆ワイナリー', brand: 'シャトーT.S' },
+    ],
+    '愛知県': [
+      { maker: '小牧ワイナリー', brand: '小牧ワイン' },
+    ],
+
+    // -------------------------------------------------------
+    // 近畿
+    // -------------------------------------------------------
+    '三重県': [
+      { maker: '伊勢志摩ワイナリー', brand: '伊勢志摩ワイン' },
+    ],
+    '滋賀県': [
+      { maker: 'ヒトミワイナリー', brand: 'ヒトミワイン' },
+    ],
+    '京都府': [
+      { maker: '天橋立ワイナリー', brand: '天橋立ワイン' },
+      { maker: '丹波ワイン', brand: '丹波ワイン' },
+    ],
+    '大阪府': [
+      { maker: 'カタシモワイナリー', brand: 'カタシモ' },
+      { maker: '飛鳥ワイン', brand: '飛鳥ワイン' },
+      { maker: '河内ワイン', brand: '河内ワイン' },
+    ],
+    '兵庫県': [
+      { maker: '神戸ワイナリー', brand: '神戸ワイン' },
+    ],
+    '奈良県': [
+      { maker: '木谷ワイン', brand: '木谷ワイン' },
+    ],
+    '和歌山県': [
+      { maker: 'プラムクリークワイン（中野BC）', brand: '紀州ワイン' },
+    ],
+
+    // -------------------------------------------------------
+    // 中国
+    // -------------------------------------------------------
+    '鳥取県': [
+      { maker: '北条ワイン', brand: '北条ワイン' },
+    ],
+    '島根県': [
+      { maker: '島根ワイナリー', brand: '島根ワイン' },
+      { maker: '奥出雲葡萄園', brand: '奥出雲ワイン' },
+    ],
+    '岡山県': [
+      { maker: 'サッポロワイン岡山ワイナリー', brand: '岡山ワイン' },
+      { maker: 'ドメーヌ・テッタ', brand: 'テッタ' },
+      { maker: 'ひるぜんワイン', brand: 'ひるぜんワイン' },
+    ],
+    '広島県': [
+      { maker: '広島三次ワイナリー', brand: 'TOMOE' },
+      { maker: '福山わいん工房', brand: '福山ワイン' },
+    ],
+    '山口県': [
+      { maker: '山口ワイナリー', brand: '山口ワイン' },
+    ],
+
+    // -------------------------------------------------------
+    // 四国
+    // -------------------------------------------------------
+    '徳島県': [
+      { maker: '鳴門のうず塩ワイナリー', brand: '鳴門ワイン' },
+    ],
+    '香川県': [
+      { maker: 'さぬきワイナリー', brand: 'さぬきワイン' },
+    ],
+    '愛媛県': [
+      { maker: '内子ワイナリー', brand: '内子ワイン' },
+    ],
+    '高知県': [
+      { maker: '井上ワイナリー', brand: '高知ワイン' },
+    ],
+
+    // -------------------------------------------------------
+    // 九州・沖縄
+    // -------------------------------------------------------
+    '福岡県': [
+      { maker: '巨峰ワイナリー', brand: '巨峰ワイン' },
+    ],
+    '佐賀県': [
+      { maker: '佐賀ワイナリー', brand: '佐賀ワイン' },
+    ],
+    '長崎県': [
+      { maker: '五島ワイナリー', brand: '五島ワイン' },
+    ],
+    '熊本県': [
+      { maker: '熊本ワイン', brand: '菊鹿ワイン' },
+      { maker: '通潤酒造', brand: '通潤ワイン' },
+    ],
+    '大分県': [
+      { maker: '安心院葡萄酒工房', brand: '安心院ワイン' },
+      { maker: '久住ワイナリー', brand: '久住ワイン' },
+    ],
+    '宮崎県': [
+      { maker: '都農ワイン', brand: '都農ワイン' },
+      { maker: '都城ワイナリー', brand: '都城ワイン' },
+    ],
+    '鹿児島県': [
+      { maker: '桜島ワイン', brand: '桜島ワイン' },
+    ],
+    '沖縄県': [
+      { maker: 'OKINAWAフルーツらんど', brand: '沖縄ワイン' },
     ],
   },
 };

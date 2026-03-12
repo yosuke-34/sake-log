@@ -3,12 +3,14 @@
 import { useEffect, useState, useCallback, useMemo } from 'react';
 import Link from 'next/link';
 import { supabase, supabaseConfigured } from '@/lib/supabase';
+import { getDeviceId } from '@/lib/deviceId';
 import { DrinkRecord } from '@/types';
 import Calendar from '@/components/Calendar';
 import RecordModal from '@/components/RecordModal';
 import VolumeStats from '@/components/VolumeStats';
+import BrandEncyclopedia from '@/components/BrandEncyclopedia';
 
-type Tab = 'calendar' | 'stats';
+type Tab = 'calendar' | 'stats' | 'encyclopedia';
 
 export default function Home() {
   const [records, setRecords] = useState<DrinkRecord[]>([]);
@@ -22,13 +24,33 @@ export default function Home() {
       return;
     }
     try {
-      const { data, error } = await supabase
-        .from('drink_records')
-        .select('*')
-        .order('created_at', { ascending: false });
+      const deviceId = getDeviceId();
 
-      if (error) throw error;
-      setRecords((data as DrinkRecord[]) || []);
+      // 既存レコード（device_id未設定）を現在のデバイスに紐付け（カラム未追加時はスキップ）
+      const { error: migrateError } = await supabase
+        .from('drink_records')
+        .update({ device_id: deviceId })
+        .is('device_id', null);
+
+      if (migrateError) {
+        // device_id カラム未追加の場合：フィルター無しで全件取得（後方互換）
+        console.warn('device_id未対応のため全件取得:', migrateError.message);
+        const { data, error } = await supabase
+          .from('drink_records')
+          .select('*')
+          .order('created_at', { ascending: false });
+        if (error) throw error;
+        setRecords((data as DrinkRecord[]) || []);
+      } else {
+        // device_id カラム対応済み：デバイスIDでフィルター
+        const { data, error } = await supabase
+          .from('drink_records')
+          .select('*')
+          .eq('device_id', deviceId)
+          .order('created_at', { ascending: false });
+        if (error) throw error;
+        setRecords((data as DrinkRecord[]) || []);
+      }
     } catch (err) {
       console.error('取得エラー:', err);
     } finally {
@@ -130,8 +152,10 @@ export default function Home() {
             </div>
           </div>
         </>
-      ) : (
+      ) : activeTab === 'stats' ? (
         <VolumeStats records={records} />
+      ) : (
+        <BrandEncyclopedia records={records} />
       )}
 
       {/* Bottom tab bar */}
@@ -159,6 +183,18 @@ export default function Home() {
               <path d="M18 20V10M12 20V4M6 20v-6" />
             </svg>
             <span className="text-xs mt-1 font-medium">飲酒量</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('encyclopedia')}
+            className={`flex-1 flex flex-col items-center py-3 transition-colors ${
+              activeTab === 'encyclopedia' ? 'text-accent' : 'text-muted'
+            }`}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+              <path d="M4 4.5A2.5 2.5 0 016.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15z" />
+            </svg>
+            <span className="text-xs mt-1 font-medium">図鑑</span>
           </button>
         </div>
       </div>

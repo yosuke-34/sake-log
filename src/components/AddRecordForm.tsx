@@ -3,7 +3,8 @@
 import { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase, supabaseConfigured } from '@/lib/supabase';
-import { DRINK_TYPES, DRINK_STYLES, DrinkType, DrinkRecord } from '@/types';
+import { getDeviceId } from '@/lib/deviceId';
+import { DRINK_TYPES, DRINK_STYLES, SAKE_TYPES, DrinkType, DrinkRecord } from '@/types';
 import { BRAND_SELECTABLE_TYPES, PREFECTURES, BRAND_DATA, BrandOption } from '@/data/brands';
 
 interface AddRecordFormProps {
@@ -42,6 +43,7 @@ export default function AddRecordForm({ editRecord }: AddRecordFormProps) {
   const [drinkType, setDrinkType] = useState<DrinkType>(initialDrinkType);
   const [brand, setBrand] = useState(editRecord?.brand || '');
   const [note, setNote] = useState(editRecord?.note || '');
+  const [sakeType, setSakeType] = useState(editRecord?.sake_type || '');
   const [photo, setPhoto] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(editRecord?.photo_url || null);
   const [existingPhotoUrl, setExistingPhotoUrl] = useState<string | null>(editRecord?.photo_url || null);
@@ -64,7 +66,8 @@ export default function AddRecordForm({ editRecord }: AddRecordFormProps) {
     if (!isBrandSelectable || !selectedPrefecture) return [];
     const typeData = BRAND_DATA[drinkType as keyof typeof BRAND_DATA];
     if (!typeData) return [];
-    return (typeData as Record<string, BrandOption[]>)[selectedPrefecture] || [];
+    const list = (typeData as Record<string, BrandOption[]>)[selectedPrefecture] || [];
+    return [...list].sort((a, b) => a.brand.localeCompare(b.brand, 'ja'));
   }, [drinkType, selectedPrefecture, isBrandSelectable]);
 
   // 現在の種類に対応する飲み方リスト
@@ -82,6 +85,7 @@ export default function AddRecordForm({ editRecord }: AddRecordFormProps) {
     setSelectedMaker('');
     setBrand('');
     setBrandMode((BRAND_SELECTABLE_TYPES as readonly string[]).includes(type) ? 'select' : 'free');
+    setSakeType('');
   };
 
   // 飲み方が変わったら杯数リセット
@@ -171,6 +175,8 @@ export default function AddRecordForm({ editRecord }: AddRecordFormProps) {
         photo_url: photoUrl,
         note: note.trim() || null,
         volume_ml: volumeMl,
+        sake_type: drinkType === '日本酒' && sakeType ? sakeType : null,
+        device_id: getDeviceId(),
       };
 
       if (isEdit) {
@@ -185,9 +191,10 @@ export default function AddRecordForm({ editRecord }: AddRecordFormProps) {
       }
 
       router.push('/');
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('保存エラー:', err);
-      alert('保存に失敗しました。Supabaseの設定を確認してください。');
+      const msg = err instanceof Error ? err.message : typeof err === 'object' && err !== null && 'message' in err ? String((err as Record<string, unknown>).message) : JSON.stringify(err);
+      alert(`保存に失敗しました: ${msg}`);
     } finally {
       setSaving(false);
     }
@@ -210,11 +217,25 @@ export default function AddRecordForm({ editRecord }: AddRecordFormProps) {
       {/* 場所 */}
       <div>
         <label className="block text-sm font-medium text-muted mb-1">場所</label>
+        <div className="flex gap-2 mb-2">
+          <button
+            type="button"
+            onClick={() => setLocation('自宅')}
+            className="px-3 py-1.5 text-sm rounded-full border transition-all"
+            style={{
+              background: location === '自宅' ? '#C53D43' : 'transparent',
+              color: location === '自宅' ? '#fff' : '#3C2A1E',
+              borderColor: location === '自宅' ? '#C53D43' : 'rgba(60,42,30,0.2)',
+            }}
+          >
+            🏠 自宅
+          </button>
+        </div>
         <input
           type="text"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          placeholder="例: 居酒屋○○、自宅"
+          placeholder="例: 居酒屋○○"
           className="w-full px-3 py-2.5 bg-card-bg border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent/40"
           required
         />
@@ -287,7 +308,7 @@ export default function AddRecordForm({ editRecord }: AddRecordFormProps) {
             {selectedPrefecture && (
               <div>
                 <label className="block text-xs text-muted mb-1">
-                  酒造・醸造所・メーカー
+                  銘柄一覧
                   {availableBrands.length > 0 && (
                     <span className="ml-1 text-accent">（{availableBrands.length}件）</span>
                   )}
@@ -296,20 +317,18 @@ export default function AddRecordForm({ editRecord }: AddRecordFormProps) {
                   <div className="max-h-48 overflow-y-auto bg-card-bg border border-border rounded-lg divide-y divide-border/50">
                     {availableBrands.map((option, i) => (
                       <button
-                        key={`${option.maker}-${i}`}
+                        key={`${option.brand}-${option.maker}-${i}`}
                         type="button"
                         onClick={() => handleMakerSelect(option)}
                         className={`w-full px-3 py-2.5 text-left text-sm transition-colors flex justify-between items-center ${
-                          selectedMaker === option.maker
+                          selectedMaker === option.maker && brand === option.brand
                             ? 'bg-accent/10 text-accent'
                             : 'hover:bg-border/20'
                         }`}
                       >
-                        <div>
-                          <span className="font-medium">{option.maker}</span>
-                        </div>
-                        <span className={`text-xs ${selectedMaker === option.maker ? 'text-accent font-bold' : 'text-muted'}`}>
-                          {option.brand}
+                        <span className="font-medium">{option.brand}</span>
+                        <span className={`text-xs ${selectedMaker === option.maker && brand === option.brand ? 'text-accent' : 'text-muted'}`}>
+                          {option.maker}
                         </span>
                       </button>
                     ))}
@@ -343,6 +362,29 @@ export default function AddRecordForm({ editRecord }: AddRecordFormProps) {
           />
         )}
       </div>
+
+      {/* 日本酒の特定名称酒 */}
+      {drinkType === '日本酒' && (
+        <div>
+          <label className="block text-sm font-medium text-muted mb-1">特定名称酒（任意）</label>
+          <div className="flex flex-wrap gap-2">
+            {SAKE_TYPES.map((type) => (
+              <button
+                key={type}
+                type="button"
+                onClick={() => setSakeType(sakeType === type ? '' : type)}
+                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors border ${
+                  sakeType === type
+                    ? 'bg-accent text-white border-accent'
+                    : 'bg-card-bg text-foreground border-border hover:bg-border/40'
+                }`}
+              >
+                {type}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* 飲み方 */}
       <div>

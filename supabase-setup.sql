@@ -41,3 +41,12 @@ create policy "Allow public insert" on storage.objects
 create policy "Allow public delete" on storage.objects
   for delete
   using (bucket_id = 'drink-photos');
+
+-- 5. 日本酒の特定名称酒カラム追加
+-- ※ 既存テーブルに追加する場合はこのALTER TABLEのみ実行
+alter table drink_records add column if not exists sake_type text;
+
+-- 6. デバイス別データ分離用カラム追加
+-- ※ 既存テーブルに追加する場合はこの2行のみ実行
+alter table drink_records add column if not exists device_id text;
+create index if not exists idx_drink_records_device_id on drink_records(device_id);

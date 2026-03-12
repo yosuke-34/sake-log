@@ -41,6 +41,11 @@ export default function RecordCard({ record, onDelete }: RecordCardProps) {
               <p className="font-bold text-foreground truncate">{record.brand}</p>
               <p className="text-sm text-muted mt-0.5">
                 {emoji} {record.drink_type}
+                {record.sake_type && (
+                  <span className="ml-1 text-xs px-1.5 py-0.5 rounded-full bg-accent/10 text-accent font-medium">
+                    {record.sake_type}
+                  </span>
+                )}
               </p>
             </div>
             <div className="flex items-center gap-1 flex-shrink-0">

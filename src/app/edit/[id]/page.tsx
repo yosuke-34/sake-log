@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { supabase, supabaseConfigured } from '@/lib/supabase';
+import { getDeviceId } from '@/lib/deviceId';
 import { DrinkRecord } from '@/types';
 import AddRecordForm from '@/components/AddRecordForm';
 
@@ -20,10 +21,12 @@ export default function EditPage() {
         return;
       }
       try {
+        const deviceId = getDeviceId();
         const { data, error } = await supabase
           .from('drink_records')
           .select('*')
           .eq('id', id)
+          .eq('device_id', deviceId)
           .single();
 
         if (error) throw error;
