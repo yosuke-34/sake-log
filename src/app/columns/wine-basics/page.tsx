@@ -23,6 +23,20 @@ export default function WineBasicsPage() {
       </div>
 
       <div className="space-y-8 text-sm leading-relaxed">
+        {/* ヒーロー画像 */}
+        <section className="rounded-xl overflow-hidden relative" style={{ height: '200px' }}>
+          <img
+            src="/hero-wine.svg"
+            alt="ワイングラスとブドウのイメージ"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 flex items-end p-4" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 60%)' }}>
+            <p className="text-xs" style={{ color: 'rgba(255,253,245,0.92)', textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>
+              8,000年の歴史を持つ、世界最古の醸造酒
+            </p>
+          </div>
+        </section>
+
         {/* イントロ */}
         <section>
           <p className="text-muted">
@@ -71,6 +85,15 @@ export default function WineBasicsPage() {
               </p>
             </div>
           </div>
+        </section>
+
+        {/* 4種類の図解 */}
+        <section className="rounded-xl overflow-hidden" style={{ border: '1px solid rgba(60,42,30,0.1)' }}>
+          <img
+            src="/accent-wine-glasses.svg"
+            alt="赤・白・ロゼ・スパークリングの4種類のワイングラス"
+            className="w-full h-auto block"
+          />
         </section>
 
         {/* ブドウ品種 */}

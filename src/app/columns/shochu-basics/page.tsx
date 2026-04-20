@@ -23,6 +23,20 @@ export default function ShochuBasicsPage() {
       </div>
 
       <div className="space-y-8 text-sm leading-relaxed">
+        {/* ヒーロー画像 */}
+        <section className="rounded-xl overflow-hidden relative" style={{ height: '200px' }}>
+          <img
+            src="/hero-shochu.svg"
+            alt="焼酎の黒ぢょかとおちょこのイメージ"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 flex items-end p-4" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 60%)' }}>
+            <p className="text-xs" style={{ color: 'rgba(255,253,245,0.92)', textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>
+              500年の歴史を持つ、日本固有の蒸留酒
+            </p>
+          </div>
+        </section>
+
         {/* イントロ */}
         <section>
           <p className="text-muted">
@@ -75,6 +89,15 @@ export default function ShochuBasicsPage() {
               </p>
             </div>
           </div>
+        </section>
+
+        {/* 原料別の図解 */}
+        <section className="rounded-xl overflow-hidden" style={{ border: '1px solid rgba(60,42,30,0.1)' }}>
+          <img
+            src="/accent-shochu-regions.svg"
+            alt="焼酎の主要産地（麦・米・芋・黒糖・泡盛）"
+            className="w-full h-auto block"
+          />
         </section>
 
         {/* 原料別 */}

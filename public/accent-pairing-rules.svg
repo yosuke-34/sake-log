@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 220" preserveAspectRatio="xMidYMid meet" role="img" aria-label="マリアージュの5つの原則">
+  <defs>
+    <linearGradient id="pBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdf8ee"/>
+      <stop offset="100%" stop-color="#f4ead4"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="220" fill="url(#pBg)"/>
+  <text x="300" y="28" text-anchor="middle" fill="#3C2A1E" font-size="14" font-weight="bold" font-family="sans-serif">マリアージュ 失敗しない5つの原則</text>
+  <g transform="translate(70,110)">
+    <circle cx="0" cy="0" r="32" fill="rgba(197,61,67,0.12)" stroke="#C53D43" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" fill="#C53D43" font-size="10" font-weight="bold">①</text>
+    <text x="0" y="13" text-anchor="middle" font-size="16">🎨</text>
+    <text x="0" y="55" text-anchor="middle" fill="#C53D43" font-size="10" font-weight="bold">色</text>
+    <text x="0" y="68" text-anchor="middle" fill="#3C2A1E" font-size="9">を合わせる</text>
+  </g>
+  <g transform="translate(180,110)">
+    <circle cx="0" cy="0" r="32" fill="rgba(139,105,20,0.14)" stroke="#8B6914" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" fill="#8B6914" font-size="10" font-weight="bold">②</text>
+    <text x="0" y="13" text-anchor="middle" font-size="16">🗾</text>
+    <text x="0" y="55" text-anchor="middle" fill="#8B6914" font-size="10" font-weight="bold">産地</text>
+    <text x="0" y="68" text-anchor="middle" fill="#3C2A1E" font-size="9">を合わせる</text>
+  </g>
+  <g transform="translate(290,110)">
+    <circle cx="0" cy="0" r="32" fill="rgba(60,42,30,0.1)" stroke="#3C2A1E" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" fill="#3C2A1E" font-size="10" font-weight="bold">③</text>
+    <text x="0" y="13" text-anchor="middle" font-size="16">⚖️</text>
+    <text x="0" y="55" text-anchor="middle" fill="#3C2A1E" font-size="10" font-weight="bold">五味</text>
+    <text x="0" y="68" text-anchor="middle" fill="#3C2A1E" font-size="9">のバランス</text>
+  </g>
+  <g transform="translate(400,110)">
+    <circle cx="0" cy="0" r="32" fill="rgba(197,61,67,0.1)" stroke="#C53D43" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" fill="#C53D43" font-size="10" font-weight="bold">④</text>
+    <text x="0" y="13" text-anchor="middle" font-size="16">🌸</text>
+    <text x="0" y="55" text-anchor="middle" fill="#C53D43" font-size="10" font-weight="bold">香り</text>
+    <text x="0" y="68" text-anchor="middle" fill="#3C2A1E" font-size="9">の方向性</text>
+  </g>
+  <g transform="translate(520,110)">
+    <circle cx="0" cy="0" r="32" fill="rgba(139,105,20,0.12)" stroke="#8B6914" stroke-width="1.5"/>
+    <text x="0" y="-4" text-anchor="middle" fill="#8B6914" font-size="10" font-weight="bold">⑤</text>
+    <text x="0" y="13" text-anchor="middle" font-size="16">💪</text>
+    <text x="0" y="55" text-anchor="middle" fill="#8B6914" font-size="10" font-weight="bold">強さ</text>
+    <text x="0" y="68" text-anchor="middle" fill="#3C2A1E" font-size="9">を揃える</text>
+  </g>
+  <g stroke="#c4b090" stroke-width="1" fill="none" opacity="0.5" stroke-dasharray="3,3">
+    <line x1="105" y1="110" x2="145" y2="110"/>
+    <line x1="215" y1="110" x2="255" y2="110"/>
+    <line x1="325" y1="110" x2="365" y2="110"/>
+    <line x1="435" y1="110" x2="485" y2="110"/>
+  </g>
+  <text x="300" y="200" text-anchor="middle" fill="#6a5a3a" font-size="10">この5原則を押さえれば、家飲みでも失敗しない</text>
+</svg>

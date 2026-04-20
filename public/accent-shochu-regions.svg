@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 240" preserveAspectRatio="xMidYMid meet" role="img" aria-label="焼酎の主要産地（九州・沖縄）">
+  <defs>
+    <linearGradient id="regionBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff8f0"/>
+      <stop offset="100%" stop-color="#fde8d8"/>
+    </linearGradient>
+    <radialGradient id="regionGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="rgba(197,61,67,0.08)"/>
+      <stop offset="100%" stop-color="rgba(197,61,67,0)"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="240" fill="url(#regionBg)"/>
+  <ellipse cx="300" cy="120" rx="260" ry="100" fill="url(#regionGlow)"/>
+  <text x="300" y="30" text-anchor="middle" fill="#3C2A1E" font-size="14" font-weight="bold" font-family="sans-serif">本格焼酎の主要産地</text>
+  <g transform="translate(50,60)">
+    <circle cx="0" cy="0" r="30" fill="rgba(139,105,20,0.15)" stroke="#8B6914" stroke-width="1.5"/>
+    <text x="0" y="5" text-anchor="middle" font-size="20">🌾</text>
+    <text x="0" y="55" text-anchor="middle" fill="#8B6914" font-size="11" font-weight="bold">麦</text>
+    <text x="0" y="70" text-anchor="middle" fill="#3C2A1E" font-size="9">大分・壱岐</text>
+  </g>
+  <g transform="translate(170,60)">
+    <circle cx="0" cy="0" r="30" fill="rgba(197,61,67,0.15)" stroke="#C53D43" stroke-width="1.5"/>
+    <text x="0" y="5" text-anchor="middle" font-size="20">🍚</text>
+    <text x="0" y="55" text-anchor="middle" fill="#C53D43" font-size="11" font-weight="bold">米</text>
+    <text x="0" y="70" text-anchor="middle" fill="#3C2A1E" font-size="9">熊本・球磨</text>
+  </g>
+  <g transform="translate(290,60)">
+    <circle cx="0" cy="0" r="30" fill="rgba(165,45,53,0.15)" stroke="#A52D35" stroke-width="1.5"/>
+    <text x="0" y="5" text-anchor="middle" font-size="20">🍠</text>
+    <text x="0" y="55" text-anchor="middle" fill="#A52D35" font-size="11" font-weight="bold">芋</text>
+    <text x="0" y="70" text-anchor="middle" fill="#3C2A1E" font-size="9">鹿児島・宮崎</text>
+  </g>
+  <g transform="translate(410,60)">
+    <circle cx="0" cy="0" r="30" fill="rgba(60,42,30,0.15)" stroke="#3C2A1E" stroke-width="1.5"/>
+    <text x="0" y="5" text-anchor="middle" font-size="20">🌴</text>
+    <text x="0" y="55" text-anchor="middle" fill="#3C2A1E" font-size="11" font-weight="bold">黒糖</text>
+    <text x="0" y="70" text-anchor="middle" fill="#3C2A1E" font-size="9">奄美群島</text>
+  </g>
+  <g transform="translate(530,60)">
+    <circle cx="0" cy="0" r="30" fill="rgba(139,105,20,0.15)" stroke="#8B6914" stroke-width="1.5"/>
+    <text x="0" y="5" text-anchor="middle" font-size="20">🏝️</text>
+    <text x="0" y="55" text-anchor="middle" fill="#8B6914" font-size="11" font-weight="bold">泡盛</text>
+    <text x="0" y="70" text-anchor="middle" fill="#3C2A1E" font-size="9">沖縄</text>
+  </g>
+  <g transform="translate(300,170)">
+    <rect x="-240" y="0" width="480" height="50" rx="8" fill="rgba(255,255,255,0.6)" stroke="rgba(60,42,30,0.15)" stroke-width="1"/>
+    <text x="0" y="18" text-anchor="middle" fill="#3C2A1E" font-size="10" font-weight="bold">原料で決まる5つの個性</text>
+    <text x="0" y="36" text-anchor="middle" fill="#6a5040" font-size="9">同じ蒸留酒でも、原料・地域・麹で香りも味も大きく変わる</text>
+  </g>
+</svg>

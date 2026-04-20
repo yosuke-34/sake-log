@@ -23,6 +23,20 @@ export default function HangoverCarePage() {
       </div>
 
       <div className="space-y-8 text-sm leading-relaxed">
+        {/* ヒーロー画像 */}
+        <section className="rounded-xl overflow-hidden relative" style={{ height: '200px' }}>
+          <img
+            src="/hero-hangover.svg"
+            alt="朝日と水のグラスのイメージ"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 flex items-end p-4" style={{ background: 'linear-gradient(to top, rgba(255,240,200,0.3) 0%, transparent 70%)' }}>
+            <p className="text-xs" style={{ color: '#3C2A1E', textShadow: '1px 1px 4px rgba(255,250,230,0.8)' }}>
+              原因を知れば、予防と対策の精度が上がる
+            </p>
+          </div>
+        </section>
+
         {/* イントロ */}
         <section>
           <p className="text-muted">
@@ -36,6 +50,15 @@ export default function HangoverCarePage() {
             「翌朝」の4段階で実践的なケア方法を紹介します。本記事は一般的な情報提供を目的としており、
             症状が重い場合や頻繁に繰り返す場合は医療機関にご相談ください。
           </p>
+        </section>
+
+        {/* 5つの原因の図解 */}
+        <section className="rounded-xl overflow-hidden" style={{ border: '1px solid rgba(60,42,30,0.1)' }}>
+          <img
+            src="/accent-hangover-causes.svg"
+            alt="二日酔いを引き起こす5つの原因の概要図"
+            className="w-full h-auto block"
+          />
         </section>
 
         {/* 原因 */}

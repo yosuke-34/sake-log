@@ -23,6 +23,20 @@ export default function FoodPairingPage() {
       </div>
 
       <div className="space-y-8 text-sm leading-relaxed">
+        {/* ヒーロー画像 */}
+        <section className="rounded-xl overflow-hidden relative" style={{ height: '200px' }}>
+          <img
+            src="/hero-pairing.svg"
+            alt="ワイングラスと料理のプレートのイメージ"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 flex items-end p-4" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 60%)' }}>
+            <p className="text-xs" style={{ color: 'rgba(255,253,245,0.92)', textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>
+              「結婚」を意味する、お酒と料理の理想的な組み合わせ
+            </p>
+          </div>
+        </section>
+
         {/* イントロ */}
         <section>
           <p className="text-muted">
@@ -35,6 +49,15 @@ export default function FoodPairingPage() {
             お酒と料理を合わせるときの基本原則、お酒の種類ごとの王道ペアリング、シーン別の実例を紹介します。
             酒ログに記録するときに「どのおつまみと合わせたか」も書き残すと、自分だけのマリアージュ辞典ができていきます。
           </p>
+        </section>
+
+        {/* 5原則の図解 */}
+        <section className="rounded-xl overflow-hidden" style={{ border: '1px solid rgba(60,42,30,0.1)' }}>
+          <img
+            src="/accent-pairing-rules.svg"
+            alt="マリアージュの5つの原則（色・産地・五味・香り・強さ）"
+            className="w-full h-auto block"
+          />
         </section>
 
         {/* 基本原則 */}
