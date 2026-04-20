@@ -26,7 +26,7 @@ export default function FoodPairingPage() {
         {/* ヒーロー画像 */}
         <section className="rounded-xl overflow-hidden relative" style={{ height: '200px' }}>
           <img
-            src="/hero-pairing.svg"
+            src="/hero-pairing.png"
             alt="ワイングラスと料理のプレートのイメージ"
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -54,7 +54,7 @@ export default function FoodPairingPage() {
         {/* 5原則の図解 */}
         <section className="rounded-xl overflow-hidden" style={{ border: '1px solid rgba(60,42,30,0.1)' }}>
           <img
-            src="/accent-pairing-rules.svg"
+            src="/accent-pairing-rules.png"
             alt="マリアージュの5つの原則（色・産地・五味・香り・強さ）"
             className="w-full h-auto block"
           />

@@ -26,7 +26,7 @@ export default function HangoverCarePage() {
         {/* ヒーロー画像 */}
         <section className="rounded-xl overflow-hidden relative" style={{ height: '200px' }}>
           <img
-            src="/hero-hangover.svg"
+            src="/hero-hangover.png"
             alt="朝日と水のグラスのイメージ"
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -55,7 +55,7 @@ export default function HangoverCarePage() {
         {/* 5つの原因の図解 */}
         <section className="rounded-xl overflow-hidden" style={{ border: '1px solid rgba(60,42,30,0.1)' }}>
           <img
-            src="/accent-hangover-causes.svg"
+            src="/accent-hangover-causes.png"
             alt="二日酔いを引き起こす5つの原因の概要図"
             className="w-full h-auto block"
           />

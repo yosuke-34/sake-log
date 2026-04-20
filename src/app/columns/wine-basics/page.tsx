@@ -26,7 +26,7 @@ export default function WineBasicsPage() {
         {/* ヒーロー画像 */}
         <section className="rounded-xl overflow-hidden relative" style={{ height: '200px' }}>
           <img
-            src="/hero-wine.svg"
+            src="/hero-wine.png"
             alt="ワイングラスとブドウのイメージ"
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -90,7 +90,7 @@ export default function WineBasicsPage() {
         {/* 4種類の図解 */}
         <section className="rounded-xl overflow-hidden" style={{ border: '1px solid rgba(60,42,30,0.1)' }}>
           <img
-            src="/accent-wine-glasses.svg"
+            src="/accent-wine-glasses.png"
             alt="赤・白・ロゼ・スパークリングの4種類のワイングラス"
             className="w-full h-auto block"
           />
