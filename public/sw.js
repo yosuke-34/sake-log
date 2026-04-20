@@ -1,5 +1,6 @@
 // 酒ログ Service Worker
 const CACHE_NAME = 'sake-log-v1';
+const SHARE_CACHE_NAME = 'share-target-cache';
 
 // インストール時：最低限のシェルをキャッシュ
 self.addEventListener('install', (event) => {
@@ -21,7 +22,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
-        keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
+        keys.filter((key) => key !== CACHE_NAME && key !== SHARE_CACHE_NAME).map((key) => caches.delete(key))
       );
     })
   );
@@ -30,6 +31,36 @@ self.addEventListener('activate', (event) => {
 
 // フェッチ：ネットワーク優先、失敗時にキャッシュ
 self.addEventListener('fetch', (event) => {
+  const url = new URL(event.request.url);
+
+  // Share Target: 写真アプリからの共有POSTを処理
+  if (event.request.method === 'POST' && url.pathname === '/add' && url.searchParams.has('shared')) {
+    event.respondWith(
+      (async () => {
+        try {
+          const formData = await event.request.formData();
+          const photo = formData.get('photo');
+          if (photo && photo instanceof File) {
+            // 画像をキャッシュに一時保存
+            const cache = await caches.open(SHARE_CACHE_NAME);
+            const response = new Response(photo, {
+              headers: {
+                'Content-Type': photo.type,
+                'X-File-Name': photo.name,
+              },
+            });
+            await cache.put('/shared-photo', response);
+          }
+        } catch (e) {
+          console.error('Share target error:', e);
+        }
+        // GETにリダイレクトして記録画面を表示
+        return Response.redirect('/add?shared=1', 303);
+      })()
+    );
+    return;
+  }
+
   // APIリクエストやSupabaseはキャッシュしない
   if (
     event.request.method !== 'GET' ||

@@ -231,7 +231,25 @@ export default function BrandBookPage({ summary, onClose }: BrandBookPageProps) 
               {/* 酒造名 */}
               {summary.maker && (
                 <p className="text-sm mb-2" style={{ color: 'rgba(60,42,30,0.6)' }}>
-                  {summary.maker}
+                  {summary.makerUrl ? (
+                    <a
+                      href={summary.makerUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 transition-colors"
+                      style={{ color: '#8B6914' }}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {summary.maker}
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                        <polyline points="15 3 21 3 21 9" />
+                        <line x1="10" y1="14" x2="21" y2="3" />
+                      </svg>
+                    </a>
+                  ) : (
+                    summary.maker
+                  )}
                 </p>
               )}
 
@@ -353,6 +371,38 @@ export default function BrandBookPage({ summary, onClose }: BrandBookPageProps) 
                 )}
               </div>
             </div>
+          </div>
+
+          {/* 楽天で購入リンク */}
+          <div
+            className="px-4 py-2"
+            style={{
+              background: 'linear-gradient(180deg, #F5EDE0 0%, #E8DFD0 100%)',
+              borderTop: '1px solid rgba(139,105,20,0.08)',
+            }}
+          >
+            <a
+              href={`https://hb.afl.rakuten.co.jp/ichiba/5229625a.cf8fbb4e.5229625b.f1834795/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${encodeURIComponent(summary.brandName + ' ' + summary.drinkType)}%2F&link_type=hybrid_url&ut=eyJwYWdlIjoic2VhcmNoIiwidHlwZSI6Imh5YnJpZF91cmwiLCJjb2wiOjF9`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 w-full py-2 rounded-lg text-sm font-bold transition-all active:scale-[0.98]"
+              style={{
+                background: 'linear-gradient(135deg, #BF0000 0%, #E60012 100%)',
+                color: '#fff',
+                boxShadow: '0 2px 8px rgba(191,0,0,0.2)',
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" />
+              </svg>
+              楽天市場でこの銘柄を探す
+            </a>
+            <p className="text-center mt-1" style={{ fontSize: '10px', color: 'rgba(60,42,30,0.35)' }}>
+              ※ 楽天市場の検索結果に移動します
+            </p>
           </div>
 
           {/* フッターボタン */}

@@ -9,6 +9,7 @@ import Calendar from '@/components/Calendar';
 import RecordModal from '@/components/RecordModal';
 import VolumeStats from '@/components/VolumeStats';
 import BrandEncyclopedia from '@/components/BrandEncyclopedia';
+import AdBanner from '@/components/AdBanner';
 
 type Tab = 'calendar' | 'stats' | 'encyclopedia';
 
@@ -109,7 +110,21 @@ export default function Home() {
   }
 
   return (
-    <div className="pb-20">
+    <div className="pb-14">
+      {/* 20歳以上向けの注意喚起 */}
+      <div
+        className="rounded-lg px-3 py-2 mb-3 text-[11px] flex items-center gap-2"
+        style={{ background: 'rgba(197,61,67,0.06)', border: '1px solid rgba(197,61,67,0.18)', color: '#C53D43' }}
+      >
+        <span aria-hidden>🔞</span>
+        <span className="flex-1">
+          本サービスは20歳以上の方を対象としています。
+          <Link href="/responsible-drinking" className="underline ml-1 font-bold">
+            適正飲酒について
+          </Link>
+        </span>
+      </div>
+
       {/* Supabase未設定時の案内 */}
       {!supabaseConfigured && (
         <div className="bg-accent/10 border border-accent/30 rounded-xl p-4 mb-4 text-sm">
@@ -151,11 +166,19 @@ export default function Home() {
               <p className="text-xs text-muted">総飲酒量</p>
             </div>
           </div>
+          {/* 広告バナー */}
+          <AdBanner />
         </>
       ) : activeTab === 'stats' ? (
-        <VolumeStats records={records} />
+        <>
+          <VolumeStats records={records} />
+          <AdBanner />
+        </>
       ) : (
-        <BrandEncyclopedia records={records} />
+        <>
+          <BrandEncyclopedia records={records} />
+          <AdBanner />
+        </>
       )}
 
       {/* Bottom tab bar */}
@@ -202,7 +225,7 @@ export default function Home() {
       {/* FAB - Add record button */}
       <Link
         href="/add"
-        className="fixed bottom-16 right-6 w-14 h-14 bg-accent text-white rounded-full shadow-lg flex items-center justify-center hover:bg-accent/90 transition-colors z-40"
+        className="fixed bottom-20 right-6 w-14 h-14 bg-accent text-white rounded-full shadow-lg flex items-center justify-center hover:bg-accent/90 transition-colors z-40"
         aria-label="記録を追加"
       >
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">

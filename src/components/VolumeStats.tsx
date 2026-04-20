@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { DrinkRecord, DrinkType, DRINK_TYPES } from '@/types';
 import DrinkTablePopup from './DrinkTablePopup';
+import Tutorial, { STATS_TUTORIAL_STEPS, STATS_TUTORIAL_STORAGE_KEY } from './Tutorial';
 
 const DRINK_EMOJI: Record<string, string> = {
   'ウィスキー': '🥃',
@@ -53,7 +54,7 @@ export default function VolumeStats({ records }: VolumeStatsProps) {
   return (
     <div className="space-y-4">
       {/* 切り替えボタン */}
-      <div className="flex bg-card-bg rounded-xl border border-border p-1 gap-1">
+      <div data-tutorial="stats-toggle" className="flex bg-card-bg rounded-xl border border-border p-1 gap-1">
         <button
           onClick={() => setViewMode('monthly')}
           className={`flex-1 py-2 rounded-lg text-sm font-bold transition-colors ${
@@ -87,6 +88,8 @@ export default function VolumeStats({ records }: VolumeStatsProps) {
       ) : (
         <TotalView records={records} />
       )}
+
+      <Tutorial steps={STATS_TUTORIAL_STEPS} storageKey={STATS_TUTORIAL_STORAGE_KEY} />
     </div>
   );
 }
@@ -145,7 +148,7 @@ function MonthlyView({
   return (
     <div className="space-y-4">
       {/* 月の飲酒量ヘッダー */}
-      <div className="bg-card-bg rounded-2xl border border-border p-5">
+      <div data-tutorial="stats-month" className="bg-card-bg rounded-2xl border border-border p-5">
         <div className="flex items-center justify-between mb-2">
           <button
             onClick={onPrevMonth}
@@ -174,22 +177,26 @@ function MonthlyView({
       </div>
 
       {/* 種類別内訳 */}
-      {typesWithRecords.length > 0 ? (
-        <TypeBreakdownList
-          sortedTypes={sortedTypes}
-          statsByType={statsByType}
-          maxVolume={maxVolume}
-          onSelect={setPopupType}
-        />
-      ) : (
-        <div className="bg-card-bg rounded-2xl border border-border p-8 text-center">
-          <p className="text-3xl mb-2">🍶</p>
-          <p className="text-muted text-sm">この月の記録はありません</p>
-        </div>
-      )}
+      <div data-tutorial="stats-type-breakdown">
+        {typesWithRecords.length > 0 ? (
+          <TypeBreakdownList
+            sortedTypes={sortedTypes}
+            statsByType={statsByType}
+            maxVolume={maxVolume}
+            onSelect={setPopupType}
+          />
+        ) : (
+          <div className="bg-card-bg rounded-2xl border border-border p-8 text-center">
+            <p className="text-3xl mb-2">🍶</p>
+            <p className="text-muted text-sm">この月の記録はありません</p>
+          </div>
+        )}
+      </div>
 
       {/* 日別の内訳 */}
-      <DailyBreakdown records={records} />
+      <div data-tutorial="stats-daily">
+        <DailyBreakdown records={records} />
+      </div>
 
       {/* ポップアップ */}
       {popupType && statsByType[popupType] && (

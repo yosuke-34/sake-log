@@ -13,6 +13,12 @@
 const STORAGE_KEY = 'sake-log-device-id';
 const URL_PARAM = 'd';
 
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+function isValidUUID(id: string): boolean {
+  return UUID_REGEX.test(id);
+}
+
 function generateUUID(): string {
   if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
     return crypto.randomUUID();
@@ -34,7 +40,7 @@ export function getDeviceId(): string {
   if (!id) {
     const params = new URLSearchParams(window.location.search);
     const urlId = params.get(URL_PARAM);
-    if (urlId && urlId.length > 8) {
+    if (urlId && isValidUUID(urlId)) {
       id = urlId;
       localStorage.setItem(STORAGE_KEY, id);
     }

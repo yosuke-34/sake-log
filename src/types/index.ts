@@ -40,6 +40,7 @@ export interface DrinkRecord {
   note: string | null;
   volume_ml: number;
   sake_type?: string | null; // 日本酒の特定名称酒
+  prefecture?: string | null; // 都道府県（任意）
   created_at: string;
 }
 
@@ -59,8 +60,8 @@ export const DRINK_STYLES: Record<DrinkType, DrinkStyle[]> = {
     { label: '500ml缶', unit_ml: 500, max_count: 5 },
   ],
   'ウィスキー': [
-    { label: 'シングル', unit_ml: 30, max_count: 1 },
-    { label: 'ダブル', unit_ml: 60, max_count: 1 },
+    { label: 'シングル', unit_ml: 30, max_count: 5 },
+    { label: 'ダブル', unit_ml: 60, max_count: 5 },
     { label: 'ハイボール', unit_ml: 350, max_count: 5 },
   ],
   'ジン': [

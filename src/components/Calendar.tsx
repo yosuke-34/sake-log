@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import DayCell from './DayCell';
+import { getHolidaysForMonth } from '@/lib/holidays';
 
 interface CalendarProps {
   recordDates: Set<string>;
@@ -31,6 +32,9 @@ export default function Calendar({ recordDates, onDateClick }: CalendarProps) {
 
   const today = new Date();
   const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+  // 祝日セット
+  const holidays = useMemo(() => getHolidaysForMonth(year, month + 1), [year, month]);
 
   const cells: (number | null)[] = [];
   for (let i = 0; i < startDayOfWeek; i++) {
@@ -101,6 +105,7 @@ export default function Calendar({ recordDates, onDateClick }: CalendarProps) {
               isToday={isToday}
               isSunday={dayOfWeek === 0}
               isSaturday={dayOfWeek === 6}
+              isHoliday={holidays.has(dateStr)}
               onClick={() => onDateClick(dateStr)}
             />
           );

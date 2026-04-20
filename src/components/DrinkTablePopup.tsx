@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // ヘッダー用の絵文字（大きいアイコン）
 const DRINK_EMOJI: Record<string, string> = {
@@ -35,7 +35,7 @@ const DRINK_MESSAGES: Record<string, string[]> = {
 };
 
 // SVGドリンクアイコン（バーカウンター上のグラス表示用）
-const DrinkSVG: Record<string, (props: { size: number; glowColor: string }) => JSX.Element> = {
+const DrinkSVG: Record<string, (props: { size: number; glowColor: string }) => React.ReactElement> = {
   'ウィスキー': ({ size, glowColor }) => (
     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
       <defs>

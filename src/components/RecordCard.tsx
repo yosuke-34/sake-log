@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { DrinkRecord } from '@/types';
 
@@ -20,6 +21,7 @@ interface RecordCardProps {
 
 export default function RecordCard({ record, onDelete }: RecordCardProps) {
   const emoji = DRINK_EMOJI[record.drink_type] || '🍶';
+  const [photoZoom, setPhotoZoom] = useState(false);
 
   return (
     <div className="bg-card-bg rounded-xl border border-border p-4 shadow-sm">
@@ -28,7 +30,8 @@ export default function RecordCard({ record, onDelete }: RecordCardProps) {
           <img
             src={record.photo_url}
             alt={record.brand}
-            className="w-20 h-20 object-cover rounded-lg flex-shrink-0"
+            className="w-20 h-20 object-cover rounded-lg flex-shrink-0 cursor-pointer active:opacity-80 transition-opacity"
+            onClick={() => setPhotoZoom(true)}
           />
         ) : (
           <div className="w-20 h-20 bg-border/30 rounded-lg flex items-center justify-center flex-shrink-0 text-3xl">
@@ -93,6 +96,40 @@ export default function RecordCard({ record, onDelete }: RecordCardProps) {
           )}
         </div>
       </div>
+      {/* 写真拡大オーバーレイ */}
+      {photoZoom && record.photo_url && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+          onClick={() => setPhotoZoom(false)}
+          style={{ animation: 'fadeIn 0.2s ease-out' }}
+        >
+          <img
+            src={record.photo_url}
+            alt={record.brand}
+            className="max-w-[90vw] max-h-[85vh] object-contain rounded-lg shadow-2xl"
+            style={{ animation: 'zoomIn 0.2s ease-out' }}
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button
+            onClick={() => setPhotoZoom(false)}
+            className="absolute top-4 right-4 bg-black/50 text-white rounded-full p-2"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      )}
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes zoomIn {
+          from { transform: scale(0.85); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 }
