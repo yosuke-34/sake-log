@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 酒ログ - Sake Log
 
-## Getting Started
+飲んだお酒を手軽に記録できる無料Webアプリです。日本酒・ウイスキー・ビール・焼酎・ワインなど、あらゆるお酒の記録をカレンダー形式で管理できます。
 
-First, run the development server:
+🌐 **公開URL**: https://sake-log-two.vercel.app
+
+## 主な機能
+
+- 📅 **カレンダー記録**: 飲んだ日をカレンダーで一覧表示（祝日表示対応）
+- 📖 **銘柄図鑑**: 記録したお酒が自動で図鑑に登録、都道府県別・種類別に閲覧
+- 📊 **飲酒量統計**: 週間・月間の飲酒量をグラフで可視化
+- 🗾 **都道府県マップ**: 飲んだお酒の産地を日本地図上に表示
+- 📱 **PWA対応**: スマホのホーム画面に追加すればネイティブアプリのように使える
+- 🔞 **年齢確認ゲート**: 20歳以上確認機能
+
+## 技術スタック
+
+- **フレームワーク**: Next.js 15 (App Router) + TypeScript
+- **スタイリング**: Tailwind CSS 4
+- **バックエンド**: Supabase (PostgreSQL + Storage)
+- **ホスティング**: Vercel
+- **PWA**: Service Worker + Web Share Target API
+
+## 開発
 
 ```bash
+# 依存関係インストール
+npm install
+
+# 開発サーバー起動
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# ビルド
+npm run build
+
+# 本番サーバー起動
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 環境変数
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`.env.local` に以下を設定してください：
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+NEXT_PUBLIC_SUPABASE_URL=<Supabase Project URL>
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<Supabase Anon Key>
+```
 
-## Learn More
+## ページ構成
 
-To learn more about Next.js, take a look at the following resources:
+| パス | 内容 |
+|---|---|
+| `/` | トップ（カレンダー・統計・図鑑） |
+| `/add` | 記録追加 |
+| `/edit/[id]` | 記録編集 |
+| `/about` | 酒ログについて |
+| `/guide` | 使い方ガイド |
+| `/columns` | お酒コラム一覧 |
+| `/columns/sake-basics` | 日本酒の基礎知識 |
+| `/columns/whisky-basics` | ウイスキーの基礎知識 |
+| `/columns/beer-basics` | ビールの基礎知識 |
+| `/responsible-drinking` | 適正飲酒ガイド |
+| `/contact` | お問い合わせ |
+| `/privacy` | プライバシーポリシー |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 注意事項
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+本アプリはお酒の記録管理を目的としており、飲酒を推奨するものではありません。
 
-## Deploy on Vercel
+- ⚠️ 20歳未満の飲酒は法律で禁止されています
+- ⚠️ 飲酒運転は絶対にやめましょう
+- ⚠️ 妊娠中・授乳期の飲酒は胎児・乳児に影響を与えます
+- ⚠️ 適度な飲酒を心がけましょう
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ライセンス
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+© 2025 酒ログ - Sake Log. All rights reserved.
