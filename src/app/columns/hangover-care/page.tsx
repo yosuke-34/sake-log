@@ -24,13 +24,13 @@ export default function HangoverCarePage() {
 
       <div className="space-y-8 text-sm leading-relaxed">
         {/* ヒーロー画像 */}
-        <section className="rounded-xl overflow-hidden relative" style={{ height: '200px' }}>
+        <section className="rounded-xl overflow-hidden relative">
           <img
             src="/hero-hangover.png"
             alt="朝日と水のグラスのイメージ"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="block w-full h-auto"
           />
-          <div className="absolute inset-0 flex items-end p-4" style={{ background: 'linear-gradient(to top, rgba(255,240,200,0.3) 0%, transparent 70%)' }}>
+          <div className="absolute inset-x-0 bottom-0 flex items-end p-4" style={{ background: 'linear-gradient(to top, rgba(255,240,200,0.5) 0%, transparent 100%)', paddingTop: '40px' }}>
             <p className="text-xs" style={{ color: '#3C2A1E', textShadow: '1px 1px 4px rgba(255,250,230,0.8)' }}>
               原因を知れば、予防と対策の精度が上がる
             </p>

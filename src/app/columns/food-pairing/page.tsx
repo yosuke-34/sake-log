@@ -24,13 +24,13 @@ export default function FoodPairingPage() {
 
       <div className="space-y-8 text-sm leading-relaxed">
         {/* ヒーロー画像 */}
-        <section className="rounded-xl overflow-hidden relative" style={{ height: '200px' }}>
+        <section className="rounded-xl overflow-hidden relative">
           <img
             src="/hero-pairing.png"
             alt="ワイングラスと料理のプレートのイメージ"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="block w-full h-auto"
           />
-          <div className="absolute inset-0 flex items-end p-4" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 60%)' }}>
+          <div className="absolute inset-x-0 bottom-0 flex items-end p-4" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 100%)', paddingTop: '40px' }}>
             <p className="text-xs" style={{ color: 'rgba(255,253,245,0.92)', textShadow: '1px 1px 4px rgba(0,0,0,0.8)' }}>
               「結婚」を意味する、お酒と料理の理想的な組み合わせ
             </p>
