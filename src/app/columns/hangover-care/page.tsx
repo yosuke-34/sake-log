@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import AdBannerWrapper from '@/components/AdBannerWrapper';
+import ArticleMeta from '@/components/ArticleMeta';
 
 export const metadata = {
   title: '二日酔いの原因と対策 - 予防・翌朝のケア・食べ物まで科学的に解説',
@@ -244,6 +245,19 @@ export default function HangoverCarePage() {
             また、頻繁に二日酔いを繰り返す場合は、飲酒量の見直しと専門医への相談をおすすめします。
           </p>
         </section>
+
+        {/* 記事情報 */}
+        <ArticleMeta
+          publishedAt="2026年5月21日"
+          updatedAt="2026年5月22日"
+          readTimeMinutes={9}
+          references={[
+            { name: '厚生労働省「e-ヘルスネット アルコール」', url: 'https://www.e-healthnet.mhlw.go.jp/information/alcohol' },
+            { name: '厚生労働省「健康に配慮した飲酒に関するガイドライン」', url: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000147861_00009.html' },
+            { name: 'アルコール健康医学協会「お酒と健康」', url: 'https://www.arukenkyo.or.jp/' },
+            { name: '国立病院機構 久里浜医療センター 公開資料' },
+          ]}
+        />
 
         {/* ナビゲーション */}
         <div className="flex gap-3 pt-2">

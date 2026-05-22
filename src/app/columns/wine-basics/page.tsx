@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import AdBannerWrapper from '@/components/AdBannerWrapper';
+import ArticleMeta from '@/components/ArticleMeta';
 
 export const metadata = {
   title: 'ワインの基礎知識 - 種類・ブドウ品種・産地・テイスティングまで',
@@ -255,6 +256,19 @@ export default function WineBasicsPage() {
             <Link href="/responsible-drinking" className="underline ml-1" style={{ color: '#C53D43' }}>適正飲酒ガイド</Link>
           </p>
         </section>
+
+        {/* 記事情報 */}
+        <ArticleMeta
+          publishedAt="2026年5月21日"
+          updatedAt="2026年5月22日"
+          readTimeMinutes={10}
+          references={[
+            { name: '日本ソムリエ協会 公式情報', url: 'https://www.sommelier.jp/' },
+            { name: '日本ワイナリー協会', url: 'https://www.winery.or.jp/' },
+            { name: '国税庁「酒のしおり」', url: 'https://www.nta.go.jp/taxes/sake/shiori-gaikyo/shiori/2024/index.htm' },
+            { name: '厚生労働省「健康日本21（アルコール）」', url: 'https://www.mhlw.go.jp/topics/tobacco/houkoku/061122c.html' },
+          ]}
+        />
 
         {/* ナビゲーション */}
         <div className="flex gap-3 pt-2">

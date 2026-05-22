@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import AdBannerWrapper from '@/components/AdBannerWrapper';
+import ArticleMeta from '@/components/ArticleMeta';
 
 export const metadata = {
   title: '焼酎の基礎知識 - 乙類・甲類の違いから原料別の特徴、飲み方まで',
@@ -305,6 +306,19 @@ export default function ShochuBasicsPage() {
             詳しくは<Link href="/responsible-drinking" className="underline" style={{ color: '#C53D43' }}>適正飲酒ガイド</Link>をご覧ください。
           </p>
         </section>
+
+        {/* 記事情報 */}
+        <ArticleMeta
+          publishedAt="2026年5月21日"
+          updatedAt="2026年5月22日"
+          readTimeMinutes={9}
+          references={[
+            { name: '本格焼酎・泡盛ものしり辞典（日本酒造組合中央会）', url: 'https://www.honkakushochu-awamori.jp/' },
+            { name: '九州本格焼酎協議会「本格焼酎の世界」' },
+            { name: '国税庁「酒のしおり」', url: 'https://www.nta.go.jp/taxes/sake/shiori-gaikyo/shiori/2024/index.htm' },
+            { name: '厚生労働省「健康日本21（アルコール）」', url: 'https://www.mhlw.go.jp/topics/tobacco/houkoku/061122c.html' },
+          ]}
+        />
 
         {/* ナビゲーション */}
         <div className="flex gap-3 pt-2">

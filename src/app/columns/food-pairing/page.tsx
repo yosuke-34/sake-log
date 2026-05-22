@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import AdBannerWrapper from '@/components/AdBannerWrapper';
+import ArticleMeta from '@/components/ArticleMeta';
 
 export const metadata = {
   title: 'お酒と料理のマリアージュ - 失敗しない合わせ方の基本ルール',
@@ -338,6 +339,19 @@ export default function FoodPairingPage() {
             ぜひご参照ください。
           </p>
         </section>
+
+        {/* 記事情報 */}
+        <ArticleMeta
+          publishedAt="2026年5月21日"
+          updatedAt="2026年5月22日"
+          readTimeMinutes={12}
+          references={[
+            { name: '日本ソムリエ協会 公式情報', url: 'https://www.sommelier.jp/' },
+            { name: '日本酒造組合中央会「日本酒と料理」', url: 'https://japansake.or.jp/sake/' },
+            { name: 'クラフトビール協会（日本）', url: 'https://beertaster.org/' },
+            { name: '厚生労働省「健康日本21（アルコール）」', url: 'https://www.mhlw.go.jp/topics/tobacco/houkoku/061122c.html' },
+          ]}
+        />
 
         {/* ナビゲーション */}
         <div className="flex gap-3 pt-2">
