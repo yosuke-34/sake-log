@@ -402,6 +402,79 @@ export default function SakeBasicsPage() {
           </div>
         </section>
 
+        {/* 銘柄紹介 */}
+        <section>
+          <h3 className="text-base font-bold mb-3" style={{ color: '#C53D43' }}>知っておきたい人気銘柄・プレミアム銘柄</h3>
+          <p className="text-muted mb-3">
+            日本酒の世界には全国に約1,150の蔵元があり、銘柄は数千に及びます。ここでは初心者がまず押さえておきたい
+            「定番銘柄」と、お酒好きの間で話題になる「プレミアム銘柄」を紹介します。銘柄を覚えると、酒店での選び方や
+            居酒屋でのオーダーが楽になります。
+          </p>
+
+          <h4 className="font-bold text-sm mb-2" style={{ color: '#C53D43' }}>📚 定番・入手しやすい銘柄</h4>
+          <p className="text-xs text-muted mb-2">スーパーや酒販店で広く流通している、ハズレを引きにくい鉄板の銘柄。</p>
+          <div className="space-y-2 mb-5">
+            {[
+              { name: '八海山（新潟）', desc: '淡麗辛口の代名詞。普通酒〜大吟醸まで全レンジが安定した品質で、価格も手頃。1,500円〜。' },
+              { name: '久保田（新潟）', desc: '朝日酒造の人気銘柄。「百寿」「千寿」「萬寿」とランクが上がる構成がわかりやすい。1,500円〜。' },
+              { name: '獺祭（だっさい / 山口）', desc: '旭酒造の銘柄で、「磨き二割三分」が有名。世界中で愛される現代的なフルーティな酒質。3,000円〜。' },
+              { name: '黒龍（福井）', desc: '吟醸酒造りのパイオニア。安定した華やかさと上品さで料亭でも定番。2,500円〜。' },
+              { name: '〆張鶴（しめはりつる / 新潟）', desc: '宮尾酒造の銘柄。柔らかい飲み口とキレの良さで、燗にしても美味しい万能型。2,000円〜。' },
+              { name: '上善如水（じょうぜんみずのごとし / 新潟）', desc: '白瀧酒造。「水のように飲める」をコンセプトに、初心者にも飲みやすい設計。1,200円〜。' },
+              { name: '菊正宗・白鶴・剣菱（兵庫・灘）', desc: '江戸時代から続く灘の大手。辛口の食中酒として家庭に定着した、まさに「定番中の定番」。1,000円〜。' },
+            ].map((b) => (
+              <div key={b.name} className="text-xs flex gap-2 p-2.5 rounded" style={{ background: 'rgba(197,61,67,0.04)' }}>
+                <span className="font-bold shrink-0 w-32" style={{ color: '#C53D43' }}>{b.name}</span>
+                <span className="text-muted">{b.desc}</span>
+              </div>
+            ))}
+          </div>
+
+          <h4 className="font-bold text-sm mb-2" style={{ color: '#8B6914' }}>🌟 ステップアップ銘柄</h4>
+          <p className="text-xs text-muted mb-2">専門の酒販店や通販でよく出会う、玄人受けする人気の中堅銘柄。</p>
+          <div className="space-y-2 mb-5">
+            {[
+              { name: '醸し人九平次（かもしびとくへいじ / 愛知）', desc: '萬乗醸造。世界の三つ星レストランで採用される、繊細でモダンな酒質。3,000円〜。' },
+              { name: '田酒（でんしゅ / 青森）', desc: '西田酒造店。「田から生まれた酒」が由来。米の旨味が前に出る、本格純米酒の王道。3,000円〜。' },
+              { name: '出羽桜・楯野川（山形）', desc: '山形の高品質吟醸を代表する蔵。フルーティで品があり、世界でも高評価。3,000円〜。' },
+              { name: '雪の茅舎（ゆきのぼうしゃ / 秋田）', desc: '齋彌酒造店。蔵付き酵母を活かした個性的な香りと旨味が魅力。2,500円〜。' },
+              { name: '鳳凰美田（ほうおうびでん / 栃木）', desc: '小林酒造。フルーティで華やかな吟醸酒の代表格。リンゴやライチを思わせる香り。3,000円〜。' },
+              { name: '醴泉（れいせん / 岐阜）', desc: '玉泉堂酒造。山田錦を中心に造られる、上品でしっかりした酒質。2,500円〜。' },
+              { name: '〆張鶴（しめはりつる）/ 鶴齢（かくれい）', desc: '新潟の名酒。久保田・八海山と並ぶ淡麗系の人気銘柄。' },
+            ].map((b) => (
+              <div key={b.name} className="text-xs flex gap-2 p-2.5 rounded" style={{ background: 'rgba(139,105,20,0.04)' }}>
+                <span className="font-bold shrink-0 w-32" style={{ color: '#8B6914' }}>{b.name}</span>
+                <span className="text-muted">{b.desc}</span>
+              </div>
+            ))}
+          </div>
+
+          <h4 className="font-bold text-sm mb-2" style={{ color: '#A52D35' }}>👑 プレミアム・希少銘柄</h4>
+          <p className="text-xs text-muted mb-2">抽選販売・特約店限定・プレミア価格などで入手困難な銘柄。出会えたら飲んでみる価値あり。</p>
+          <div className="space-y-2 mb-3">
+            {[
+              { name: '十四代（じゅうよんだい / 山形）', desc: '高木酒造。日本酒プレミアの代名詞。「本丸」でも定価4,000円が市場で数万円。中取り・龍泉などの上位は10万円超。' },
+              { name: '飛露喜（ひろき / 福島）', desc: '廣木酒造本店。1999年に「無濾過生原酒」で一世を風靡。福島を代表する超人気銘柄。定価3,000円台。' },
+              { name: '写楽（しゃらく / 福島）', desc: '宮泉銘醸。「会津の良酒」を目指す若手蔵の代表格。すっきりした旨味で人気急上昇中。' },
+              { name: '新政（あらまさ / 秋田）', desc: '伝統的な6号酵母を活用し、生酛・木桶仕込みで「No.6」「コスモス」「亜麻猫」など個性派ラインナップ。' },
+              { name: '而今（じこん / 三重）', desc: '木屋正酒造。「過去や未来でなく而（しか）して今」が銘柄名の由来。緻密で華やかな酒質。' },
+              { name: '田酒 純米大吟醸 斗瓶取り', desc: '田酒の最高峰。年間生産量が少なく、特約店でも抽選販売。出会えたら奇跡レベル。' },
+              { name: '黒龍 石田屋・二左衛門・無二（福井）', desc: '黒龍酒造の超プレミアムライン。蔵元限定販売も多い。1本3〜5万円台。' },
+              { name: '磯自慢 中取り35（静岡）', desc: '磯自慢酒造の最高峰。山田錦35%精米の華やかさは別格。' },
+            ].map((b) => (
+              <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(165,45,53,0.05)', border: '1px solid rgba(165,45,53,0.12)' }}>
+                <div className="font-bold mb-0.5" style={{ color: '#A52D35' }}>{b.name}</div>
+                <div className="text-muted">{b.desc}</div>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-[11px] text-muted">
+            ※ 価格・入手難度は2026年時点の一般的な情報です。プレミア銘柄を不当に高い転売価格で購入することは推奨しません。
+            正規ルート（特約店・蔵元直販・抽選）での購入を心がけましょう。
+          </p>
+        </section>
+
         {/* 保存方法 */}
         <section>
           <h3 className="text-base font-bold mb-3" style={{ color: '#C53D43' }}>日本酒の保存方法</h3>

@@ -249,6 +249,82 @@ export default function ShochuBasicsPage() {
           </div>
         </section>
 
+        {/* 銘柄紹介 */}
+        <section>
+          <h3 className="text-base font-bold mb-3" style={{ color: '#C53D43' }}>知っておきたい人気銘柄・プレミアム銘柄</h3>
+          <p className="text-muted mb-3">
+            本格焼酎の世界には全国に約600の蔵元があり、銘柄数は無数にあります。ここでは初心者向けの「定番銘柄」と、
+            焼酎愛好家の間で語り継がれる「プレミアム3M（モリ・ムラオ・マオウ）」をはじめとする希少銘柄を紹介します。
+          </p>
+
+          <h4 className="font-bold text-sm mb-2" style={{ color: '#C53D43' }}>📚 定番・入手しやすい銘柄</h4>
+          <p className="text-xs text-muted mb-2">スーパー・酒販店で広く流通する鉄板銘柄。</p>
+          <div className="space-y-2 mb-5">
+            {[
+              { name: '黒霧島（霧島酒造・芋）', desc: '宮崎の霧島酒造が誇る、芋焼酎日本一の販売量。黒麹仕込みの甘さとキレ。1,500円〜（1.8L）。' },
+              { name: '白霧島（霧島酒造・芋）', desc: '白麹仕込みでまろやかな飲み口。お湯割り・ロック・水割りどれでも美味しい。' },
+              { name: 'いいちこ（三和酒類・麦）', desc: '「下町のナポレオン」。大分の麦焼酎で、日本全国で最も飲まれている麦焼酎。1,300円〜（1.8L）。' },
+              { name: '二階堂（二階堂酒造・麦）', desc: '大分麦焼酎の老舗。CM「やすらぎ二階堂」で有名。クセが少なく食中酒に最適。' },
+              { name: '吉四六（よしちょむ / 二階堂酒造）', desc: '二階堂の上位ライン。陶器ボトルが特徴的で贈答品にも人気。' },
+              { name: '佐藤 黒（佐藤酒造・芋）', desc: '芋焼酎ブームの火付け役。コクと甘さの絶妙なバランス。3,000円〜（720ml）。入手はやや難。' },
+              { name: '鳥飼（鳥飼酒造・米）', desc: '熊本米焼酎の代表格。ライチを思わせる華やかな吟醸香で、日本酒党にも好評。' },
+              { name: '白岳・しろ（高橋酒造・米）', desc: '熊本米焼酎で最大シェア。すっきりと飲みやすく、家庭の常備に。' },
+              { name: 'れんと（奄美大島開運酒造・黒糖）', desc: '黒糖焼酎の入門に最適。クラシック音楽を聴かせて熟成させるユニーク製法。' },
+            ].map((b) => (
+              <div key={b.name} className="text-xs flex gap-2 p-2.5 rounded" style={{ background: 'rgba(197,61,67,0.04)' }}>
+                <span className="font-bold shrink-0 w-44" style={{ color: '#C53D43' }}>{b.name}</span>
+                <span className="text-muted">{b.desc}</span>
+              </div>
+            ))}
+          </div>
+
+          <h4 className="font-bold text-sm mb-2" style={{ color: '#8B6914' }}>🌟 ステップアップ銘柄</h4>
+          <p className="text-xs text-muted mb-2">焼酎専門店や蔵元直販でよく出会う、ワンランク上の銘柄。</p>
+          <div className="space-y-2 mb-5">
+            {[
+              { name: '富乃宝山（西酒造・芋）', desc: '黄麹仕込みの華やかな芋焼酎。フルーティで日本酒党にも飲みやすい。冷やしてロックで。' },
+              { name: '中々（黒木本店・麦）', desc: '麦焼酎の名門・宮崎黒木本店の定番。長期貯蔵による樽香の上品さ。' },
+              { name: '兼八（四ツ谷酒造・麦）', desc: '大分の小さな蔵。麦の香ばしさが強烈で「裸麦100％」の独特な世界観。プレミア化進行中。' },
+              { name: '大和桜（大和桜酒造・芋）', desc: '鹿児島の小さな蔵による白麹仕込み。シャープでキレのある芋焼酎。' },
+              { name: 'なかむら（中村酒造場・芋）', desc: '鹿児島の蔵で全工程かめ仕込み。豊かな旨味と上品な甘さ。年間生産量が少なく入手しづらい。' },
+              { name: '萬膳（萬膳酒造・芋）', desc: '霧島町（鹿児島）の小さな蔵。「萬膳」「真鶴」など限定品が多く、根強いファン層。' },
+              { name: '伊佐美（甲斐商店・芋）', desc: '鹿児島伝統の黒麹芋焼酎。長らくプレミアが付いていた銘柄。' },
+              { name: '佐藤 麦（佐藤酒造・麦）', desc: '芋焼酎で有名な佐藤酒造の麦焼酎。シャープで香ばしいキレ系。' },
+              { name: '十四代 秘蔵焼酎 隼（高木酒造・粕取）', desc: '十四代の蔵で造られる、酒粕を蒸留した粕取焼酎。日本酒の華やかさが受け継がれる。' },
+            ].map((b) => (
+              <div key={b.name} className="text-xs flex gap-2 p-2.5 rounded" style={{ background: 'rgba(139,105,20,0.04)' }}>
+                <span className="font-bold shrink-0 w-44" style={{ color: '#8B6914' }}>{b.name}</span>
+                <span className="text-muted">{b.desc}</span>
+              </div>
+            ))}
+          </div>
+
+          <h4 className="font-bold text-sm mb-2" style={{ color: '#A52D35' }}>👑 プレミアム・希少銘柄（焼酎3M他）</h4>
+          <p className="text-xs text-muted mb-2">抽選販売・特約店限定・年間生産量が極めて少ない、入手困難な銘柄。</p>
+          <div className="space-y-2 mb-3">
+            {[
+              { name: '森伊蔵（森伊蔵酒造・芋）', desc: '焼酎3Mの筆頭。年4回の電話抽選販売が有名で、当選確率はわずか数%。定価3,000円→市場価格2〜3万円。' },
+              { name: '村尾（村尾酒造・芋）', desc: '一人で造る幻の蔵元・村尾酒造。年間生産量が極めて少なく、定価2,500円が市場で1〜2万円。' },
+              { name: '魔王（白玉醸造・芋）', desc: '黄麹仕込みの先駆けで、3Mの中で最もフルーティで華やか。定価3,000円台→市場価格1万円台。' },
+              { name: '百年の孤独（黒木本店・麦）', desc: '日本初の樽貯蔵麦焼酎。ウイスキーのような琥珀色と熟成感で、麦焼酎の概念を変えた1本。定価5,000円台。' },
+              { name: '中々 古酒（黒木本店・麦）', desc: '中々の長期熟成版。10年以上熟成で、樽香と複雑さが圧倒的。プレミア価格。' },
+              { name: '無題（菊水酒造）/ 一刻者プレミアム', desc: '芋100％の特別な造り。希少な原料米と長期熟成で、贈答用としても人気。' },
+              { name: '黒糖焼酎「龍宮 かめ仕込み」（富田酒造場）', desc: '奄美の小さな蔵。かめ仕込みの手作り少量生産。海外でも評価高。' },
+              { name: '泡盛古酒（クース）30年・50年', desc: '泡盛を30年以上甕で寝かせた、まろやかで複雑な香りの最高峰。1本数万〜数十万円。' },
+            ].map((b) => (
+              <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(165,45,53,0.05)', border: '1px solid rgba(165,45,53,0.12)' }}>
+                <div className="font-bold mb-0.5" style={{ color: '#A52D35' }}>{b.name}</div>
+                <div className="text-muted">{b.desc}</div>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-[11px] text-muted">
+            ※ 焼酎3M（森伊蔵・村尾・魔王）は1990年代後半〜2000年代の焼酎ブームで一世を風靡し、現在もプレミアが付いた銘柄です。
+            居酒屋・バーで一杯（60〜90ml）から試せる店もあるので、まずは少量で味を知るのがおすすめ。
+          </p>
+        </section>
+
         {/* 保存 */}
         <section>
           <h3 className="text-base font-bold mb-3" style={{ color: '#C53D43' }}>保存とエイジング</h3>
