@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Link from "next/link";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import AgeVerificationGate from "@/components/AgeVerificationGate";
 import "./globals.css";
@@ -116,16 +117,19 @@ export default function RootLayout({
           />
           {/* コンテンツ */}
           <div className="relative pt-5 pb-4">
-            <h1
-              className="text-2xl text-center tracking-[0.3em]"
-              style={{
-                fontFamily: '"Zen Antique Soft", "Noto Serif JP", serif',
-                textShadow: '0 1px 3px rgba(0,0,0,0.15)',
-                letterSpacing: '0.3em',
-              }}
-            >
-              酒ログ
-            </h1>
+            <Link href="/" className="block text-center no-underline" aria-label="酒ログ - ホームへ">
+              <h1
+                className="text-2xl tracking-[0.3em]"
+                style={{
+                  fontFamily: '"Zen Antique Soft", "Noto Serif JP", serif',
+                  textShadow: '0 1px 3px rgba(0,0,0,0.15)',
+                  letterSpacing: '0.3em',
+                  color: 'inherit',
+                }}
+              >
+                酒ログ
+              </h1>
+            </Link>
           </div>
           {/* 暖簾の裾（波型カット風） */}
           <div className="absolute bottom-0 left-0 right-0">
@@ -147,9 +151,11 @@ export default function RootLayout({
         </main>
         <footer className="py-6 pb-24 text-xs text-muted max-w-lg mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
+            <a href="/" className="hover:text-foreground transition-colors">ホーム</a>
+            <a href="/columns" className="hover:text-foreground transition-colors">お酒コラム</a>
+            <a href="/calendar" className="hover:text-foreground transition-colors">飲酒記録</a>
             <a href="/about" className="hover:text-foreground transition-colors">酒ログについて</a>
             <a href="/guide" className="hover:text-foreground transition-colors">使い方ガイド</a>
-            <a href="/columns" className="hover:text-foreground transition-colors">お酒コラム</a>
             <a href="/responsible-drinking" className="hover:text-foreground transition-colors">適正飲酒</a>
             <a href="/contact" className="hover:text-foreground transition-colors">お問い合わせ</a>
             <a href="/privacy" className="hover:text-foreground transition-colors">プライバシーポリシー</a>

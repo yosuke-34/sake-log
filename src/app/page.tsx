@@ -1,119 +1,93 @@
-'use client';
-
-import { useEffect, useState, useCallback, useMemo } from 'react';
 import Link from 'next/link';
-import { supabase, supabaseConfigured } from '@/lib/supabase';
-import { getDeviceId } from '@/lib/deviceId';
-import { DrinkRecord } from '@/types';
-import Calendar from '@/components/Calendar';
-import RecordModal from '@/components/RecordModal';
-import VolumeStats from '@/components/VolumeStats';
-import BrandEncyclopedia from '@/components/BrandEncyclopedia';
-import AdBanner from '@/components/AdBanner';
+import type { Metadata } from 'next';
+import AdBannerWrapper from '@/components/AdBannerWrapper';
 
-type Tab = 'calendar' | 'stats' | 'encyclopedia';
+export const metadata: Metadata = {
+  title: '酒ログ - お酒の楽しみ方を学べるメディア｜日本酒・ウイスキー・ビール・焼酎・ワイン',
+  description: '日本酒・ウイスキー・ビール・焼酎・ワインの基礎知識、人気銘柄ガイド、料理とのマリアージュ、二日酔いケア、適正飲酒まで——お酒をもっと深く楽しむための情報メディア「酒ログ」。記録アプリ機能で自分の飲酒履歴も管理できます。',
+};
 
-export default function Home() {
-  const [records, setRecords] = useState<DrinkRecord[]>([]);
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<Tab>('calendar');
+const FEATURED_COLUMNS = [
+  {
+    href: '/columns/sake-basics',
+    emoji: '🍶',
+    title: '日本酒の基礎知識',
+    excerpt: '特定名称酒の分類、日本酒度・酸度の読み方、生酛/山廃/速醸の違い、新潟・兵庫・京都など主要産地の特徴、酒器選びまで体系的に解説。',
+    tags: ['特定名称酒', '産地ガイド', '酒米', '銘柄紹介'],
+    color: '#C53D43',
+    readTime: '約12分',
+  },
+  {
+    href: '/columns/whisky-basics',
+    emoji: '🥃',
+    title: 'ウイスキーの基礎知識',
+    excerpt: 'シングルモルトとブレンデッドの違い、スコッチ6リージョン、樽の種類が味に与える影響、ハイボールの黄金比、ジャパニーズの歴史まで完全網羅。',
+    tags: ['5大ウイスキー', '樽の種類', 'ハイボール', '銘柄紹介'],
+    color: '#8B6914',
+    readTime: '約11分',
+  },
+  {
+    href: '/columns/beer-basics',
+    emoji: '🍺',
+    title: 'ビールの基礎知識',
+    excerpt: 'ラガーとエール、IPA・スタウト・ヴァイツェンなどビアスタイル、ホップと麦芽、IBU/ABV/SRM、グラス選び、日本のクラフトブルワリーまで。',
+    tags: ['ビアスタイル', 'ホップ品種', 'クラフト', '銘柄紹介'],
+    color: '#B8860B',
+    readTime: '約11分',
+  },
+  {
+    href: '/columns/shochu-basics',
+    emoji: '🍠',
+    title: '焼酎の基礎知識',
+    excerpt: '乙類・甲類の違い、芋・麦・米・黒糖・泡盛の原料別個性、九州地域性、ロック/水割り/お湯割り/前割りの楽しみ方、3M銘柄紹介まで徹底解説。',
+    tags: ['原料別', '九州地域', '飲み方', '焼酎3M'],
+    color: '#A52D35',
+    readTime: '約9分',
+  },
+  {
+    href: '/columns/wine-basics',
+    emoji: '🍷',
+    title: 'ワインの基礎知識',
+    excerpt: '赤・白・ロゼ・スパークリングの4タイプ、主要ブドウ品種、フランス・イタリア・新世界・日本の産地特徴、テイスティング手順、銘柄紹介まで。',
+    tags: ['ブドウ品種', '産地', 'テイスティング', '銘柄紹介'],
+    color: '#6B1E2E',
+    readTime: '約10分',
+  },
+];
 
-  const fetchRecords = useCallback(async () => {
-    if (!supabaseConfigured) {
-      setLoading(false);
-      return;
-    }
-    try {
-      const deviceId = getDeviceId();
+const PRACTICAL_COLUMNS = [
+  {
+    href: '/columns/food-pairing',
+    emoji: '🍽️',
+    title: 'お酒と料理のマリアージュ',
+    excerpt: '失敗しない5つの原則、日本酒/ビール/ワイン/ウイスキー/焼酎それぞれの王道ペアリング、家飲み/お祝い/和食シーン別のおすすめ。',
+    color: '#8B6914',
+    readTime: '約12分',
+  },
+  {
+    href: '/columns/hangover-care',
+    emoji: '💧',
+    title: '二日酔いの原因と対策',
+    excerpt: 'アセトアルデヒド・脱水・低血糖など科学的な5つの原因、飲む前/最中/翌朝の実践的ケア、症状別のおすすめ食べ物まで完全解説。',
+    color: '#3C2A1E',
+    readTime: '約9分',
+  },
+];
 
-      // 既存レコード（device_id未設定）を現在のデバイスに紐付け（カラム未追加時はスキップ）
-      const { error: migrateError } = await supabase
-        .from('drink_records')
-        .update({ device_id: deviceId })
-        .is('device_id', null);
+const ALCOHOL_TYPES = [
+  { name: '日本酒', emoji: '🍶', href: '/columns/sake-basics', color: '#C53D43', count: '1,150蔵元' },
+  { name: 'ウイスキー', emoji: '🥃', href: '/columns/whisky-basics', color: '#8B6914', count: '世界5大産地' },
+  { name: 'ビール', emoji: '🍺', href: '/columns/beer-basics', color: '#B8860B', count: '100+スタイル' },
+  { name: '焼酎', emoji: '🍠', href: '/columns/shochu-basics', color: '#A52D35', count: '5原料' },
+  { name: 'ワイン', emoji: '🍷', href: '/columns/wine-basics', color: '#6B1E2E', count: '8,000年の歴史' },
+];
 
-      if (migrateError) {
-        // device_id カラム未追加の場合：フィルター無しで全件取得（後方互換）
-        console.warn('device_id未対応のため全件取得:', migrateError.message);
-        const { data, error } = await supabase
-          .from('drink_records')
-          .select('*')
-          .order('created_at', { ascending: false });
-        if (error) throw error;
-        setRecords((data as DrinkRecord[]) || []);
-      } else {
-        // device_id カラム対応済み：デバイスIDでフィルター
-        const { data, error } = await supabase
-          .from('drink_records')
-          .select('*')
-          .eq('device_id', deviceId)
-          .order('created_at', { ascending: false });
-        if (error) throw error;
-        setRecords((data as DrinkRecord[]) || []);
-      }
-    } catch (err) {
-      console.error('取得エラー:', err);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchRecords();
-  }, [fetchRecords]);
-
-  const recordDates = new Set(records.map((r) => r.date));
-  const totalVolume = useMemo(
-    () => records.reduce((sum, r) => sum + (r.volume_ml || 0), 0),
-    [records]
-  );
-
-  const selectedRecords = selectedDate
-    ? records.filter((r) => r.date === selectedDate)
-    : [];
-
-  const handleDelete = async (id: string) => {
-    if (!confirm('この記録を削除しますか？')) return;
-
-    try {
-      const record = records.find((r) => r.id === id);
-
-      if (record?.photo_url) {
-        const fileName = record.photo_url.split('/').pop();
-        if (fileName) {
-          await supabase.storage.from('drink-photos').remove([fileName]);
-        }
-      }
-
-      const { error } = await supabase.from('drink_records').delete().eq('id', id);
-      if (error) throw error;
-
-      setRecords((prev) => prev.filter((r) => r.id !== id));
-
-      const remaining = records.filter((r) => r.date === selectedDate && r.id !== id);
-      if (remaining.length === 0) {
-        setSelectedDate(null);
-      }
-    } catch (err) {
-      console.error('削除エラー:', err);
-      alert('削除に失敗しました。');
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <div className="text-muted">読み込み中...</div>
-      </div>
-    );
-  }
-
+export default function HomePage() {
   return (
-    <div className="pb-14">
-      {/* 20歳以上向けの注意喚起 */}
+    <div className="pb-14 text-foreground">
+      {/* 年齢確認バナー */}
       <div
-        className="rounded-lg px-3 py-2 mb-3 text-[11px] flex items-center gap-2"
+        className="rounded-lg px-3 py-2 mb-4 text-[11px] flex items-center gap-2"
         style={{ background: 'rgba(197,61,67,0.06)', border: '1px solid rgba(197,61,67,0.18)', color: '#C53D43' }}
       >
         <span aria-hidden>🔞</span>
@@ -125,123 +99,260 @@ export default function Home() {
         </span>
       </div>
 
-      {/* Supabase未設定時の案内 */}
-      {!supabaseConfigured && (
-        <div className="bg-accent/10 border border-accent/30 rounded-xl p-4 mb-4 text-sm">
-          <p className="font-bold text-accent mb-1">Supabase未設定</p>
-          <p className="text-foreground">
-            <code className="bg-border/30 px-1 rounded">.env.local</code> に Supabase の URL と Anon Key を設定してください。
-            詳しくは <code className="bg-border/30 px-1 rounded">supabase-setup.sql</code> を参照してください。
+      {/* ヒーローセクション */}
+      <section
+        className="rounded-2xl p-5 mb-6 relative overflow-hidden"
+        style={{
+          background: 'linear-gradient(135deg, rgba(197,61,67,0.08) 0%, rgba(139,105,20,0.08) 50%, rgba(60,42,30,0.06) 100%)',
+          border: '1px solid rgba(197,61,67,0.18)',
+        }}
+      >
+        <h2 className="text-xl font-bold mb-2" style={{ color: '#3C2A1E', fontFamily: '"Noto Serif JP", serif' }}>
+          お酒の楽しみ方を、もっと深く。
+        </h2>
+        <p className="text-sm text-muted leading-relaxed mb-4">
+          酒ログは、日本酒・ウイスキー・ビール・焼酎・ワインの基礎から、料理との合わせ方、適正飲酒の知識まで、
+          お酒を楽しむすべての人のための情報メディアです。記録アプリ機能で、あなた自身のお酒履歴も
+          振り返ることができます。
+        </p>
+        <div className="grid grid-cols-2 gap-2">
+          <Link
+            href="/columns"
+            className="text-center py-2.5 rounded-lg text-sm font-bold transition-colors no-underline"
+            style={{ background: '#C53D43', color: '#fff' }}
+          >
+            📝 コラムを読む
+          </Link>
+          <Link
+            href="/calendar"
+            className="text-center py-2.5 rounded-lg text-sm font-bold transition-colors no-underline"
+            style={{ background: 'rgba(139,105,20,0.15)', color: '#8B6914', border: '1px solid rgba(139,105,20,0.3)' }}
+          >
+            📅 アプリを開く
+          </Link>
+        </div>
+      </section>
+
+      {/* お酒の種類別ガイド */}
+      <section className="mb-6">
+        <h2 className="text-base font-bold mb-3 pb-2 border-b" style={{ color: '#3C2A1E', borderColor: 'rgba(60,42,30,0.15)' }}>
+          🍶 お酒の種類別ガイド
+        </h2>
+        <p className="text-xs text-muted mb-3">
+          世界には数えきれないほどのお酒がありますが、まずは大きな分類を押さえると一気に世界が広がります。
+        </p>
+        <div className="grid grid-cols-5 gap-2">
+          {ALCOHOL_TYPES.map((t) => (
+            <Link
+              key={t.name}
+              href={t.href}
+              className="rounded-xl p-2 text-center transition-all active:scale-95 no-underline"
+              style={{
+                background: `${t.color}10`,
+                border: `1px solid ${t.color}25`,
+              }}
+            >
+              <div className="text-2xl mb-1">{t.emoji}</div>
+              <div className="text-[10px] font-bold mb-0.5" style={{ color: t.color }}>{t.name}</div>
+              <div className="text-[9px] text-muted leading-tight">{t.count}</div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* お酒コラム（種類別） */}
+      <section className="mb-6">
+        <h2 className="text-base font-bold mb-3 pb-2 border-b" style={{ color: '#3C2A1E', borderColor: 'rgba(60,42,30,0.15)' }}>
+          📚 お酒の基礎を深く知る
+        </h2>
+        <p className="text-xs text-muted mb-3">
+          各お酒の歴史・製法・産地・銘柄ガイドを、専門家の参考資料に基づいて丁寧に解説。
+          1記事あたり3,000〜5,000字の読み応え。
+        </p>
+        <div className="space-y-3">
+          {FEATURED_COLUMNS.map((col) => (
+            <Link
+              key={col.href}
+              href={col.href}
+              className="block rounded-xl p-4 transition-all active:scale-[0.98] no-underline"
+              style={{
+                background: `linear-gradient(135deg, ${col.color}08 0%, ${col.color}12 100%)`,
+                border: `1px solid ${col.color}20`,
+              }}
+            >
+              <div className="flex gap-3 items-start">
+                <span className="text-3xl shrink-0 mt-0.5">{col.emoji}</span>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-baseline justify-between gap-2 mb-1">
+                    <h3 className="font-bold text-sm" style={{ color: col.color }}>
+                      {col.title}
+                    </h3>
+                    <span className="text-[10px] text-muted shrink-0">{col.readTime}</span>
+                  </div>
+                  <p className="text-xs text-muted leading-relaxed mb-2">{col.excerpt}</p>
+                  <div className="flex flex-wrap gap-1">
+                    {col.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[10px] px-1.5 py-0.5 rounded"
+                        style={{ background: `${col.color}15`, color: col.color }}
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <AdBannerWrapper />
+
+      {/* お酒コラム（実用編） */}
+      <section className="mb-6">
+        <h2 className="text-base font-bold mb-3 pb-2 border-b" style={{ color: '#3C2A1E', borderColor: 'rgba(60,42,30,0.15)' }}>
+          🍽️ もっと楽しむ・健やかに楽しむ
+        </h2>
+        <p className="text-xs text-muted mb-3">
+          家飲みも特別な日も、お酒を健やかに楽しむための実用ガイド。
+        </p>
+        <div className="space-y-3">
+          {PRACTICAL_COLUMNS.map((col) => (
+            <Link
+              key={col.href}
+              href={col.href}
+              className="block rounded-xl p-4 transition-all active:scale-[0.98] no-underline"
+              style={{
+                background: `linear-gradient(135deg, ${col.color}08 0%, ${col.color}12 100%)`,
+                border: `1px solid ${col.color}20`,
+              }}
+            >
+              <div className="flex gap-3 items-start">
+                <span className="text-3xl shrink-0 mt-0.5">{col.emoji}</span>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-baseline justify-between gap-2 mb-1">
+                    <h3 className="font-bold text-sm" style={{ color: col.color }}>
+                      {col.title}
+                    </h3>
+                    <span className="text-[10px] text-muted shrink-0">{col.readTime}</span>
+                  </div>
+                  <p className="text-xs text-muted leading-relaxed">{col.excerpt}</p>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* アプリ機能の紹介 */}
+      <section
+        className="rounded-2xl p-5 mb-6"
+        style={{ background: 'rgba(139,105,20,0.05)', border: '1px solid rgba(139,105,20,0.15)' }}
+      >
+        <h2 className="text-base font-bold mb-2" style={{ color: '#8B6914' }}>
+          📅 飲酒記録アプリ機能
+        </h2>
+        <p className="text-xs text-muted mb-4 leading-relaxed">
+          コラムだけでなく、酒ログには無料で使える「飲酒記録アプリ」機能もあります。
+          飲んだお酒をカレンダーに記録し、銘柄図鑑や統計で自分の傾向を振り返ることができます。
+          会員登録不要、データはご利用の端末で個別管理されます。
+        </p>
+        <div className="grid grid-cols-3 gap-2 mb-4">
+          <div className="rounded-lg p-2 text-center" style={{ background: 'rgba(255,255,255,0.5)' }}>
+            <div className="text-2xl mb-1">📅</div>
+            <div className="text-[10px] font-bold mb-0.5" style={{ color: '#8B6914' }}>カレンダー</div>
+            <div className="text-[9px] text-muted leading-tight">日付ごとに飲んだ銘柄を記録</div>
+          </div>
+          <div className="rounded-lg p-2 text-center" style={{ background: 'rgba(255,255,255,0.5)' }}>
+            <div className="text-2xl mb-1">📊</div>
+            <div className="text-[10px] font-bold mb-0.5" style={{ color: '#8B6914' }}>飲酒量統計</div>
+            <div className="text-[9px] text-muted leading-tight">純アルコール量で適量を可視化</div>
+          </div>
+          <div className="rounded-lg p-2 text-center" style={{ background: 'rgba(255,255,255,0.5)' }}>
+            <div className="text-2xl mb-1">📖</div>
+            <div className="text-[10px] font-bold mb-0.5" style={{ color: '#8B6914' }}>銘柄図鑑</div>
+            <div className="text-[9px] text-muted leading-tight">飲んだ銘柄を都道府県別に</div>
+          </div>
+        </div>
+        <Link
+          href="/calendar"
+          className="block text-center py-2.5 rounded-lg text-sm font-bold transition-colors no-underline"
+          style={{ background: '#8B6914', color: '#fff' }}
+        >
+          アプリを開く →
+        </Link>
+        <p className="text-[10px] text-muted mt-2 text-center">
+          詳しい使い方は <Link href="/guide" className="underline" style={{ color: '#8B6914' }}>使い方ガイド</Link> をご覧ください。
+        </p>
+      </section>
+
+      {/* 適正飲酒について */}
+      <section
+        className="rounded-2xl p-5 mb-6"
+        style={{ background: 'linear-gradient(135deg, rgba(197,61,67,0.05) 0%, rgba(139,105,20,0.05) 100%)', border: '1px solid rgba(197,61,67,0.2)' }}
+      >
+        <h2 className="text-base font-bold mb-2" style={{ color: '#C53D43' }}>
+          🍀 お酒は適量で、健やかに
+        </h2>
+        <p className="text-xs text-muted leading-relaxed mb-3">
+          適度な飲酒は食事や人との時間をより豊かにしますが、健康を損なわないことが何より大切です。
+          厚生労働省は「節度ある適度な飲酒」を1日あたり純アルコール約20g（ビール500ml、日本酒1合、
+          ウイスキーダブル1杯程度）と定めています。お酒は20歳になってから、適量を守って楽しみましょう。
+        </p>
+        <div className="grid grid-cols-2 gap-2">
+          <Link
+            href="/responsible-drinking"
+            className="text-center py-2 rounded-lg text-xs font-bold transition-colors no-underline"
+            style={{ background: 'rgba(197,61,67,0.12)', color: '#C53D43' }}
+          >
+            適正飲酒ガイド →
+          </Link>
+          <Link
+            href="/columns/hangover-care"
+            className="text-center py-2 rounded-lg text-xs font-bold transition-colors no-underline"
+            style={{ background: 'rgba(60,42,30,0.08)', color: '#3C2A1E' }}
+          >
+            二日酔いケア →
+          </Link>
+        </div>
+      </section>
+
+      {/* サイトについて */}
+      <section className="mb-6">
+        <h2 className="text-base font-bold mb-3 pb-2 border-b" style={{ color: '#3C2A1E', borderColor: 'rgba(60,42,30,0.15)' }}>
+          ℹ️ 酒ログについて
+        </h2>
+        <div className="space-y-2 text-xs text-muted leading-relaxed">
+          <p>
+            酒ログは、お酒を愛するすべての人のために運営される独立した情報メディアです。
+            日本酒造組合中央会、国税庁、厚生労働省、各業界団体が公表する一次情報を参考に、
+            初心者にも分かりやすい言葉で、お酒の世界を紹介しています。
+          </p>
+          <p>
+            記事中で紹介する銘柄・店舗・サービスは、編集部が独自に選定したもので、
+            広告や金銭的な対価による掲載は行っていません。各記事の末尾に「参考資料」を明示し、
+            情報の信頼性を担保することを心がけています。
           </p>
         </div>
-      )}
-
-      {/* Tab content */}
-      {activeTab === 'calendar' ? (
-        <>
-          {/* Calendar */}
-          <div className="bg-card-bg rounded-2xl border border-border p-4 shadow-sm">
-            <Calendar
-              recordDates={recordDates}
-              onDateClick={(date) => setSelectedDate(date)}
-            />
-          </div>
-
-          {/* Stats summary */}
-          <div className="mt-4 grid grid-cols-3 gap-3">
-            <div className="bg-card-bg rounded-xl border border-border p-3 text-center">
-              <p className="text-2xl font-bold text-accent">{records.length}</p>
-              <p className="text-xs text-muted">総記録数</p>
-            </div>
-            <div className="bg-card-bg rounded-xl border border-border p-3 text-center">
-              <p className="text-2xl font-bold text-accent">{recordDates.size}</p>
-              <p className="text-xs text-muted">記録日数</p>
-            </div>
-            <div className="bg-card-bg rounded-xl border border-border p-3 text-center">
-              <p className="text-2xl font-bold text-accent">
-                {totalVolume >= 1000
-                  ? `${(totalVolume / 1000).toFixed(1)}L`
-                  : `${totalVolume}ml`}
-              </p>
-              <p className="text-xs text-muted">総飲酒量</p>
-            </div>
-          </div>
-          {/* 広告バナー */}
-          <AdBanner />
-        </>
-      ) : activeTab === 'stats' ? (
-        <>
-          <VolumeStats records={records} />
-          <AdBanner />
-        </>
-      ) : (
-        <>
-          <BrandEncyclopedia records={records} />
-          <AdBanner />
-        </>
-      )}
-
-      {/* Bottom tab bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-card-bg border-t border-border z-30">
-        <div className="max-w-lg mx-auto flex">
-          <button
-            onClick={() => setActiveTab('calendar')}
-            className={`flex-1 flex flex-col items-center py-3 transition-colors ${
-              activeTab === 'calendar' ? 'text-accent' : 'text-muted'
-            }`}
+        <div className="grid grid-cols-2 gap-2 mt-3">
+          <Link
+            href="/about"
+            className="text-center py-2 rounded-lg text-xs font-bold transition-colors no-underline"
+            style={{ background: 'rgba(197,61,67,0.08)', color: '#C53D43' }}
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="3" y="4" width="18" height="18" rx="2" />
-              <path d="M16 2v4M8 2v4M3 10h18" />
-            </svg>
-            <span className="text-xs mt-1 font-medium">カレンダー</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('stats')}
-            className={`flex-1 flex flex-col items-center py-3 transition-colors ${
-              activeTab === 'stats' ? 'text-accent' : 'text-muted'
-            }`}
+            🏠 酒ログについて
+          </Link>
+          <Link
+            href="/contact"
+            className="text-center py-2 rounded-lg text-xs font-bold transition-colors no-underline"
+            style={{ background: 'rgba(60,42,30,0.06)', color: '#3C2A1E' }}
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 20V10M12 20V4M6 20v-6" />
-            </svg>
-            <span className="text-xs mt-1 font-medium">飲酒量</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('encyclopedia')}
-            className={`flex-1 flex flex-col items-center py-3 transition-colors ${
-              activeTab === 'encyclopedia' ? 'text-accent' : 'text-muted'
-            }`}
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
-              <path d="M4 4.5A2.5 2.5 0 016.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15z" />
-            </svg>
-            <span className="text-xs mt-1 font-medium">図鑑</span>
-          </button>
+            ✉️ お問い合わせ
+          </Link>
         </div>
-      </div>
-
-      {/* FAB - Add record button */}
-      <Link
-        href="/add"
-        className="fixed bottom-20 right-6 w-14 h-14 bg-accent text-white rounded-full shadow-lg flex items-center justify-center hover:bg-accent/90 transition-colors z-40"
-        aria-label="記録を追加"
-      >
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-          <path d="M12 5v14M5 12h14" />
-        </svg>
-      </Link>
-
-      {/* Record modal */}
-      {selectedDate && (
-        <RecordModal
-          date={selectedDate}
-          records={selectedRecords}
-          onClose={() => setSelectedDate(null)}
-          onDelete={handleDelete}
-        />
-      )}
+      </section>
     </div>
   );
 }
