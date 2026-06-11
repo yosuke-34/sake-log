@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import AdBannerWrapper from '@/components/AdBannerWrapper';
+import FirstVisitRouter from '@/components/FirstVisitRouter';
 
 export const metadata: Metadata = {
   title: '酒ログ - お酒の楽しみ方を学べるメディア｜日本酒・ウイスキー・ビール・焼酎・ワイン',
@@ -85,6 +86,9 @@ const ALCOHOL_TYPES = [
 export default function HomePage() {
   return (
     <div className="pb-14 text-foreground">
+      {/* リピーターは /calendar へ自動転送、初回はランディングを表示 */}
+      <FirstVisitRouter />
+
       {/* 年齢確認バナー */}
       <div
         className="rounded-lg px-3 py-2 mb-4 text-[11px] flex items-center gap-2"
