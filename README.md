@@ -50,18 +50,56 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=<Supabase Anon Key>
 
 | パス | 内容 |
 |---|---|
-| `/` | トップ（カレンダー・統計・図鑑） |
+| `/` | SSRランディング（初回訪問者向け）／リピーターは自動的に `/calendar` へ |
+| `/calendar` | カレンダー・統計・図鑑のアプリ機能 |
 | `/add` | 記録追加 |
 | `/edit/[id]` | 記録編集 |
 | `/about` | 酒ログについて |
 | `/guide` | 使い方ガイド |
 | `/columns` | お酒コラム一覧 |
-| `/columns/sake-basics` | 日本酒の基礎知識 |
-| `/columns/whisky-basics` | ウイスキーの基礎知識 |
-| `/columns/beer-basics` | ビールの基礎知識 |
+| `/columns/sake-basics` | 日本酒の基礎知識（人気・希少銘柄ガイド付き） |
+| `/columns/whisky-basics` | ウイスキーの基礎知識（人気・希少銘柄ガイド付き） |
+| `/columns/beer-basics` | ビールの基礎知識（人気・希少銘柄ガイド付き） |
+| `/columns/shochu-basics` | 焼酎の基礎知識（人気・希少銘柄ガイド付き） |
+| `/columns/wine-basics` | ワインの基礎知識（人気・希少銘柄ガイド付き） |
+| `/columns/food-pairing` | お酒と料理のマリアージュ |
+| `/columns/hangover-care` | 二日酔いの原因と対策 |
 | `/responsible-drinking` | 適正飲酒ガイド |
 | `/contact` | お問い合わせ |
 | `/privacy` | プライバシーポリシー |
+
+## 🚚 PC引越し・新環境セットアップ
+
+このプロジェクトは **フォルダ1つで完結する設計**になっています。
+
+### 引越し手順
+
+1. **このプロジェクトフォルダ全体を新PCにコピー**（USB/外付けSSD/クラウド経由）
+2. 新PC で Node.js 18+ と Git をインストール
+3. プロジェクトフォルダに移動して `npm install`
+4. `secrets/env.local.backup.txt` を `.env.local` にコピー（中身そのまま）
+5. `npm run dev` で動作確認
+
+### 新PC の Claude Code に引継ぎ依頼
+
+新環境で Claude Code を起動して、こう伝えてください：
+
+> `HANDOVER.md` を読んで状況を理解して、続きから作業を再開して
+
+これで [HANDOVER.md](./HANDOVER.md) に書かれた全文脈（経緯・現状・進行中タスク）が Claude に伝わり、シームレスに開発を継続できます。
+
+### 引越しキットの構成
+
+| ファイル/フォルダ | 役割 |
+|---|---|
+| `HANDOVER.md` | 引継ぎマスター文書（最初に読むべき） |
+| `secrets/` | アカウント情報・env のバックアップ（gitignore対象） |
+| `secrets/env.local.backup.txt` | `.env.local` の完全バックアップ |
+| `secrets/accounts.md` | 各種サービスのアカウント情報 |
+| `.env.local.example` | 環境変数のテンプレート（公開可） |
+| `.claude/conversation-archive/` | Claude会話履歴のバックアップ（gitignore対象） |
+| `docs/google-play-listing.md` | Google Play ストア掲載文ドラフト |
+| `docs/screenshot-guide.md` | スクリーンショット撮影ガイド |
 
 ## 注意事項
 
