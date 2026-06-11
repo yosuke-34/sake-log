@@ -43,7 +43,7 @@ export default function ContactPage() {
               下記メールアドレスまで、以下の情報を明記のうえご連絡ください。
             </p>
             <div className="bg-white rounded p-3 my-3 text-sm font-mono text-center" style={{ border: '1px solid rgba(197,61,67,0.2)', color: '#3C2A1E' }}>
-              sake-log-support [at] example.com
+              sakelogapp.info [at] gmail.com
             </div>
             <p className="text-[10px] text-muted">
               ※ スパム対策のため「@」を「[at]」と表記しています。送信時は「@」に置き換えてください。
