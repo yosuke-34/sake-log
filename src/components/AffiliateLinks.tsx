@@ -8,7 +8,10 @@
  * rel="sponsored" を付与することで、Googleにスポンサードリンクであることを明示する。
  */
 
-const RAKUTEN_AFFILIATE_ID = process.env.NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID || '';
+// 既存の楽天アフィリエイトID（BrandBookPageで使われていたもの）をフォールバックとして使用。
+// 環境変数 NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID で上書き可能。
+const RAKUTEN_AFFILIATE_ID =
+  process.env.NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID || '5229625a.cf8fbb4e.5229625b.f1834795';
 const AMAZON_ASSOCIATE_TAG = process.env.NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG || '';
 
 type AffiliateLinksProps = {

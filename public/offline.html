@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>オフライン - 酒ログ</title>
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: 'Noto Sans JP', system-ui, -apple-system, sans-serif;
+      background: #FAF5EF;
+      color: #3C2A1E;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .container {
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+    .emoji {
+      font-size: 64px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 22px;
+      font-weight: bold;
+      color: #C53D43;
+      margin-bottom: 12px;
+      font-family: 'Noto Serif JP', serif;
+    }
+    p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #6a5a4a;
+      margin-bottom: 24px;
+    }
+    .card {
+      background: rgba(255,255,255,0.6);
+      border: 1px solid rgba(60,42,30,0.1);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+    .card h2 {
+      font-size: 13px;
+      font-weight: bold;
+      color: #8B6914;
+      margin-bottom: 8px;
+    }
+    .card ul {
+      list-style: none;
+      font-size: 12px;
+      line-height: 1.7;
+      color: #6a5a4a;
+    }
+    .card li::before {
+      content: "・";
+      color: #C53D43;
+      margin-right: 4px;
+    }
+    .button {
+      display: inline-block;
+      padding: 12px 32px;
+      background: #C53D43;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .button:active {
+      opacity: 0.85;
+    }
+    .note {
+      font-size: 11px;
+      color: #999;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="emoji">🍶</div>
+    <h1>オフラインです</h1>
+    <p>
+      インターネット接続を確認してください。<br>
+      キャッシュ済みのページは引き続きご利用いただけます。
+    </p>
+
+    <div class="card">
+      <h2>📖 オフラインでもできること</h2>
+      <ul>
+        <li>過去に開いたコラムページの閲覧</li>
+        <li>カレンダーアプリの起動（記録はオンライン復帰後に同期）</li>
+        <li>アプリのホーム画面アイコンからの起動</li>
+      </ul>
+    </div>
+
+    <button class="button" onclick="window.location.reload()">
+      再読み込み
+    </button>
+    <p class="note">
+      ネットワークが復帰したら自動的に通常表示に戻ります
+    </p>
+  </div>
+
+  <script>
+    // ネットワーク復帰時に自動リロード
+    window.addEventListener('online', () => {
+      window.location.reload();
+    });
+  </script>
+</body>
+</html>

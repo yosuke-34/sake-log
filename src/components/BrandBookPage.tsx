@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { BrandSummary } from '@/lib/encyclopediaUtils';
 import { DRINK_EMOJI, getVolumeMedal, getVolumeProgress, MEDAL_INFO } from '@/lib/encyclopediaUtils';
+import AffiliateLinks from './AffiliateLinks';
 
 interface BrandBookPageProps {
   summary: BrandSummary;
@@ -373,35 +374,24 @@ export default function BrandBookPage({ summary, onClose }: BrandBookPageProps) 
             </div>
           </div>
 
-          {/* 楽天で購入リンク */}
+          {/* 購入リンク（楽天・Amazon） */}
           <div
-            className="px-4 py-2"
+            className="px-4 py-3"
             style={{
               background: 'linear-gradient(180deg, #F5EDE0 0%, #E8DFD0 100%)',
               borderTop: '1px solid rgba(139,105,20,0.08)',
             }}
+            onClick={(e) => e.stopPropagation()}
           >
-            <a
-              href={`https://hb.afl.rakuten.co.jp/ichiba/5229625a.cf8fbb4e.5229625b.f1834795/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${encodeURIComponent(summary.brandName + ' ' + summary.drinkType)}%2F&link_type=hybrid_url&ut=eyJwYWdlIjoic2VhcmNoIiwidHlwZSI6Imh5YnJpZF91cmwiLCJjb2wiOjF9`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full py-2 rounded-lg text-sm font-bold transition-all active:scale-[0.98]"
-              style={{
-                background: 'linear-gradient(135deg, #BF0000 0%, #E60012 100%)',
-                color: '#fff',
-                boxShadow: '0 2px 8px rgba(191,0,0,0.2)',
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="9" cy="21" r="1" />
-                <circle cx="20" cy="21" r="1" />
-                <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" />
-              </svg>
-              楽天市場でこの銘柄を探す
-            </a>
-            <p className="text-center mt-1" style={{ fontSize: '10px', color: 'rgba(60,42,30,0.35)' }}>
-              ※ 楽天市場の検索結果に移動します
+            <p className="text-center mb-1.5" style={{ fontSize: '11px', color: 'rgba(60,42,30,0.6)', fontWeight: 'bold' }}>
+              この銘柄を探す
+            </p>
+            <AffiliateLinks
+              keyword={`${summary.brandName} ${summary.drinkType}`}
+              className="justify-center"
+            />
+            <p className="text-center mt-1.5" style={{ fontSize: '10px', color: 'rgba(60,42,30,0.35)' }}>
+              ※ 各サイトの検索結果に移動します
             </p>
           </div>
 

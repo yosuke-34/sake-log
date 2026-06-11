@@ -1,17 +1,25 @@
 // 酒ログ Service Worker
-const CACHE_NAME = 'sake-log-v1';
+// バージョンを上げると古いキャッシュが削除される
+const CACHE_NAME = 'sake-log-v2';
 const SHARE_CACHE_NAME = 'share-target-cache';
+const OFFLINE_PAGE = '/offline.html';
 
-// インストール時：最低限のシェルをキャッシュ
+// インストール時：シェルとオフラインページをプリキャッシュ
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll([
         '/',
+        '/calendar',
+        '/columns',
+        '/responsible-drinking',
         '/manifest.json',
         '/icon-192.png',
         '/icon-512.png',
-      ]);
+        OFFLINE_PAGE,
+      ]).catch(() => {
+        // 個別の失敗は無視（一部リソースが取れなくてもSW自体は登録）
+      });
     })
   );
   self.skipWaiting();
@@ -29,7 +37,7 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// フェッチ：ネットワーク優先、失敗時にキャッシュ
+// フェッチ：ネットワーク優先、失敗時にキャッシュ、最終フォールバックはoffline.html
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
@@ -41,7 +49,6 @@ self.addEventListener('fetch', (event) => {
           const formData = await event.request.formData();
           const photo = formData.get('photo');
           if (photo && photo instanceof File) {
-            // 画像をキャッシュに一時保存
             const cache = await caches.open(SHARE_CACHE_NAME);
             const response = new Response(photo, {
               headers: {
@@ -54,14 +61,13 @@ self.addEventListener('fetch', (event) => {
         } catch (e) {
           console.error('Share target error:', e);
         }
-        // GETにリダイレクトして記録画面を表示
         return Response.redirect('/add?shared=1', 303);
       })()
     );
     return;
   }
 
-  // APIリクエストやSupabaseはキャッシュしない
+  // GET以外、SupabaseやAPIはキャッシュしない（生存しないと困るリクエスト）
   if (
     event.request.method !== 'GET' ||
     event.request.url.includes('supabase') ||
@@ -70,10 +76,34 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // ナビゲーションリクエスト（HTMLページ）はネットワーク優先＋オフラインフォールバック
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      (async () => {
+        try {
+          const networkResponse = await fetch(event.request);
+          if (networkResponse.ok) {
+            const cache = await caches.open(CACHE_NAME);
+            cache.put(event.request, networkResponse.clone());
+          }
+          return networkResponse;
+        } catch {
+          // ネットワーク失敗時：まずキャッシュ、最後にオフラインページ
+          const cached = await caches.match(event.request);
+          if (cached) return cached;
+          const offline = await caches.match(OFFLINE_PAGE);
+          if (offline) return offline;
+          return new Response('オフラインです', { status: 503, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+        }
+      })()
+    );
+    return;
+  }
+
+  // その他のリソース（JS/CSS/画像）はネットワーク優先、失敗時キャッシュ
   event.respondWith(
     fetch(event.request)
       .then((response) => {
-        // 成功したらキャッシュを更新
         if (response.ok) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
@@ -82,9 +112,6 @@ self.addEventListener('fetch', (event) => {
         }
         return response;
       })
-      .catch(() => {
-        // オフライン時はキャッシュから返す
-        return caches.match(event.request);
-      })
+      .catch(() => caches.match(event.request))
   );
 });

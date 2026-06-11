@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { DrinkRecord } from '@/types';
+import AffiliateLinks from './AffiliateLinks';
 
 const DRINK_EMOJI: Record<string, string> = {
   'ウィスキー': '🥃',
@@ -93,6 +94,9 @@ export default function RecordCard({ record, onDelete }: RecordCardProps) {
           </div>
           {record.note && (
             <p className="text-xs text-muted mt-1 line-clamp-2">{record.note}</p>
+          )}
+          {record.brand && record.brand !== 'その他' && (
+            <AffiliateLinks keyword={record.brand} className="mt-2" />
           )}
         </div>
       </div>
