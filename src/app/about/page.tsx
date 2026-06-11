@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import AdBannerWrapper from '@/components/AdBannerWrapper';
 
 export const metadata = {
   title: '酒ログについて - お酒の記録帳アプリ',
@@ -171,8 +170,6 @@ export default function AboutPage() {
             お酒は20歳になってから。飲酒運転は法律で禁止されています。適度な飲酒を心がけましょう。
           </p>
         </section>
-
-        <AdBannerWrapper />
 
         {/* ナビゲーション */}
         <div className="flex gap-3 pt-2">

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import AdBannerWrapper from '@/components/AdBannerWrapper';
 import ArticleMeta from '@/components/ArticleMeta';
 
 export const metadata = {
@@ -196,8 +195,6 @@ export default function SakeBasicsPage() {
             </div>
           </div>
         </section>
-
-        <AdBannerWrapper />
 
         {/* 主要産地 */}
         <section>
@@ -536,8 +533,6 @@ export default function SakeBasicsPage() {
             </div>
           </div>
         </section>
-
-        <AdBannerWrapper />
 
         {/* 注意 */}
         <section

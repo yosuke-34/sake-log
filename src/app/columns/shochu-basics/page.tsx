@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import AdBannerWrapper from '@/components/AdBannerWrapper';
 import ArticleMeta from '@/components/ArticleMeta';
 
 export const metadata = {
@@ -167,8 +166,6 @@ export default function ShochuBasicsPage() {
             </div>
           </div>
         </section>
-
-        <AdBannerWrapper />
 
         {/* 飲み方 */}
         <section>

@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import AdBannerWrapper from '@/components/AdBannerWrapper';
 import FirstVisitRouter from '@/components/FirstVisitRouter';
 
 export const metadata: Metadata = {
@@ -211,8 +210,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
-      <AdBannerWrapper />
 
       {/* お酒コラム（実用編） */}
       <section className="mb-6">

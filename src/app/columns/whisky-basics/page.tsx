@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import AdBannerWrapper from '@/components/AdBannerWrapper';
 import ArticleMeta from '@/components/ArticleMeta';
 
 export const metadata = {
@@ -220,8 +219,6 @@ export default function WhiskyBasicsPage() {
           </div>
         </section>
 
-        <AdBannerWrapper />
-
         {/* 樽の種類 */}
         <section>
           <h3 className="text-base font-bold mb-3" style={{ color: '#8B6914' }}>樽の種類が味わいを決める</h3>
@@ -387,8 +384,6 @@ export default function WhiskyBasicsPage() {
             </p>
           </div>
         </section>
-
-        <AdBannerWrapper />
 
         {/* 銘柄紹介 */}
         <section>

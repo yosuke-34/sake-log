@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import AdBannerWrapper from '@/components/AdBannerWrapper';
 import ArticleMeta from '@/components/ArticleMeta';
 
 export const metadata = {
@@ -112,8 +111,6 @@ export default function FoodPairingPage() {
             </div>
           </div>
         </section>
-
-        <AdBannerWrapper />
 
         {/* お酒別ペアリング */}
         <section>

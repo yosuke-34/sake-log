@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import AdBannerWrapper from '@/components/AdBannerWrapper';
 import ArticleMeta from '@/components/ArticleMeta';
 
 export const metadata = {
@@ -192,8 +191,6 @@ export default function BeerBasicsPage() {
           </div>
         </section>
 
-        <AdBannerWrapper />
-
         {/* ホップの種類 */}
         <section>
           <h3 className="text-base font-bold mb-3" style={{ color: '#B8860B' }}>覚えておきたいホップ品種</h3>
@@ -352,8 +349,6 @@ export default function BeerBasicsPage() {
             </div>
           </div>
         </section>
-
-        <AdBannerWrapper />
 
         {/* 日本のクラフトビール */}
         <section>

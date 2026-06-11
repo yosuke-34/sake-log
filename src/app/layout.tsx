@@ -73,7 +73,6 @@ export default function RootLayout({
         />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3074656347564106" crossOrigin="anonymous"></script>
       </head>
       <body className="antialiased min-h-dvh">
         <ServiceWorkerRegister />

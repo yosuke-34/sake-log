@@ -9,7 +9,6 @@ import Calendar from '@/components/Calendar';
 import RecordModal from '@/components/RecordModal';
 import VolumeStats from '@/components/VolumeStats';
 import BrandEncyclopedia from '@/components/BrandEncyclopedia';
-import AdBanner from '@/components/AdBanner';
 
 type Tab = 'calendar' | 'stats' | 'encyclopedia';
 
@@ -166,19 +165,11 @@ export default function Home() {
               <p className="text-xs text-muted">総飲酒量</p>
             </div>
           </div>
-          {/* 広告バナー */}
-          <AdBanner />
         </>
       ) : activeTab === 'stats' ? (
-        <>
-          <VolumeStats records={records} />
-          <AdBanner />
-        </>
+        <VolumeStats records={records} />
       ) : (
-        <>
-          <BrandEncyclopedia records={records} />
-          <AdBanner />
-        </>
+        <BrandEncyclopedia records={records} />
       )}
 
       {/* Bottom tab bar */}

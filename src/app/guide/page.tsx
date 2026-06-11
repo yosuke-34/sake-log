@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import AdBannerWrapper from '@/components/AdBannerWrapper';
 
 export const metadata = {
   title: '使い方ガイド - 酒ログ',
@@ -174,8 +173,6 @@ export default function GuidePage() {
             </div>
           </div>
         </section>
-
-        <AdBannerWrapper />
 
         {/* ナビゲーション */}
         <div className="flex gap-3 pt-2">

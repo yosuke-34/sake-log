@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import AdBannerWrapper from '@/components/AdBannerWrapper';
 
 export const metadata = {
   title: 'お酒コラム - 日本酒・ウイスキー・ビール・ワイン・焼酎の基礎知識',
@@ -121,8 +120,6 @@ export default function ColumnsPage() {
             </div>
           </section>
         ))}
-
-        <AdBannerWrapper />
 
         <section
           className="rounded-xl p-4"
