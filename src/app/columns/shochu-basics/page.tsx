@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import ArticleMeta from '@/components/ArticleMeta';
+import AffiliateLinks from '@/components/AffiliateLinks';
 
 export const metadata = {
   title: '焼酎の基礎知識 - 乙類・甲類の違いから原料別の特徴、飲み方まで',
@@ -268,9 +269,12 @@ export default function ShochuBasicsPage() {
               { name: '白岳・しろ（高橋酒造・米）', desc: '熊本米焼酎で最大シェア。すっきりと飲みやすく、家庭の常備に。' },
               { name: 'れんと（奄美大島開運酒造・黒糖）', desc: '黒糖焼酎の入門に最適。クラシック音楽を聴かせて熟成させるユニーク製法。' },
             ].map((b) => (
-              <div key={b.name} className="text-xs flex gap-2 p-2.5 rounded" style={{ background: 'rgba(197,61,67,0.04)' }}>
-                <span className="font-bold shrink-0 w-44" style={{ color: '#C53D43' }}>{b.name}</span>
-                <span className="text-muted">{b.desc}</span>
+              <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(197,61,67,0.04)' }}>
+                <div className="flex gap-2">
+                  <span className="font-bold shrink-0 w-44" style={{ color: '#C53D43' }}>{b.name}</span>
+                  <span className="text-muted">{b.desc}</span>
+                </div>
+                <AffiliateLinks keyword={b.name} />
               </div>
             ))}
           </div>
@@ -289,9 +293,12 @@ export default function ShochuBasicsPage() {
               { name: '佐藤 麦（佐藤酒造・麦）', desc: '芋焼酎で有名な佐藤酒造の麦焼酎。シャープで香ばしいキレ系。' },
               { name: '十四代 秘蔵焼酎 隼（高木酒造・粕取）', desc: '十四代の蔵で造られる、酒粕を蒸留した粕取焼酎。日本酒の華やかさが受け継がれる。' },
             ].map((b) => (
-              <div key={b.name} className="text-xs flex gap-2 p-2.5 rounded" style={{ background: 'rgba(139,105,20,0.04)' }}>
-                <span className="font-bold shrink-0 w-44" style={{ color: '#8B6914' }}>{b.name}</span>
-                <span className="text-muted">{b.desc}</span>
+              <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(139,105,20,0.04)' }}>
+                <div className="flex gap-2">
+                  <span className="font-bold shrink-0 w-44" style={{ color: '#8B6914' }}>{b.name}</span>
+                  <span className="text-muted">{b.desc}</span>
+                </div>
+                <AffiliateLinks keyword={b.name} />
               </div>
             ))}
           </div>
@@ -312,6 +319,7 @@ export default function ShochuBasicsPage() {
               <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(165,45,53,0.05)', border: '1px solid rgba(165,45,53,0.12)' }}>
                 <div className="font-bold mb-0.5" style={{ color: '#A52D35' }}>{b.name}</div>
                 <div className="text-muted">{b.desc}</div>
+                <AffiliateLinks keyword={b.name} />
               </div>
             ))}
           </div>

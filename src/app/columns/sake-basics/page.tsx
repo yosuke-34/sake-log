@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import ArticleMeta from '@/components/ArticleMeta';
+import AffiliateLinks from '@/components/AffiliateLinks';
 
 export const metadata = {
   title: '日本酒の基礎知識 - 特定名称酒・日本酒度・産地・酒器まで徹底解説',
@@ -420,9 +421,12 @@ export default function SakeBasicsPage() {
               { name: '上善如水（じょうぜんみずのごとし / 新潟）', desc: '白瀧酒造。「水のように飲める」をコンセプトに、初心者にも飲みやすい設計。1,200円〜。' },
               { name: '菊正宗・白鶴・剣菱（兵庫・灘）', desc: '江戸時代から続く灘の大手。辛口の食中酒として家庭に定着した、まさに「定番中の定番」。1,000円〜。' },
             ].map((b) => (
-              <div key={b.name} className="text-xs flex gap-2 p-2.5 rounded" style={{ background: 'rgba(197,61,67,0.04)' }}>
-                <span className="font-bold shrink-0 w-32" style={{ color: '#C53D43' }}>{b.name}</span>
-                <span className="text-muted">{b.desc}</span>
+              <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(197,61,67,0.04)' }}>
+                <div className="flex gap-2">
+                  <span className="font-bold shrink-0 w-32" style={{ color: '#C53D43' }}>{b.name}</span>
+                  <span className="text-muted">{b.desc}</span>
+                </div>
+                <AffiliateLinks keyword={b.name} />
               </div>
             ))}
           </div>
@@ -439,9 +443,12 @@ export default function SakeBasicsPage() {
               { name: '醴泉（れいせん / 岐阜）', desc: '玉泉堂酒造。山田錦を中心に造られる、上品でしっかりした酒質。2,500円〜。' },
               { name: '〆張鶴（しめはりつる）/ 鶴齢（かくれい）', desc: '新潟の名酒。久保田・八海山と並ぶ淡麗系の人気銘柄。' },
             ].map((b) => (
-              <div key={b.name} className="text-xs flex gap-2 p-2.5 rounded" style={{ background: 'rgba(139,105,20,0.04)' }}>
-                <span className="font-bold shrink-0 w-32" style={{ color: '#8B6914' }}>{b.name}</span>
-                <span className="text-muted">{b.desc}</span>
+              <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(139,105,20,0.04)' }}>
+                <div className="flex gap-2">
+                  <span className="font-bold shrink-0 w-32" style={{ color: '#8B6914' }}>{b.name}</span>
+                  <span className="text-muted">{b.desc}</span>
+                </div>
+                <AffiliateLinks keyword={b.name} />
               </div>
             ))}
           </div>
@@ -462,6 +469,7 @@ export default function SakeBasicsPage() {
               <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(165,45,53,0.05)', border: '1px solid rgba(165,45,53,0.12)' }}>
                 <div className="font-bold mb-0.5" style={{ color: '#A52D35' }}>{b.name}</div>
                 <div className="text-muted">{b.desc}</div>
+                <AffiliateLinks keyword={b.name} />
               </div>
             ))}
           </div>

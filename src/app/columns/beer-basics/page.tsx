@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import ArticleMeta from '@/components/ArticleMeta';
+import AffiliateLinks from '@/components/AffiliateLinks';
 
 export const metadata = {
   title: 'ビールの基礎知識 - スタイル・ホップ・麦芽・注ぎ方・クラフト完全ガイド',
@@ -424,9 +425,12 @@ export default function BeerBasicsPage() {
               { name: 'ハイネケン（オランダ）', desc: '世界190カ国以上で流通するインターナショナルラガー。緑のボトルが象徴。350ml缶 約280円。' },
               { name: 'ギネス（アイルランド）', desc: '世界で最も有名なスタウト。クリーミーな泡と焙煎の苦味で唯一無二の存在感。約330円。' },
             ].map((b) => (
-              <div key={b.name} className="text-xs flex gap-2 p-2.5 rounded" style={{ background: 'rgba(184,134,11,0.04)' }}>
-                <span className="font-bold shrink-0 w-40" style={{ color: '#B8860B' }}>{b.name}</span>
-                <span className="text-muted">{b.desc}</span>
+              <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(184,134,11,0.04)' }}>
+                <div className="flex gap-2">
+                  <span className="font-bold shrink-0 w-40" style={{ color: '#B8860B' }}>{b.name}</span>
+                  <span className="text-muted">{b.desc}</span>
+                </div>
+                <AffiliateLinks keyword={b.name} />
               </div>
             ))}
           </div>
@@ -445,9 +449,12 @@ export default function BeerBasicsPage() {
               { name: 'デリリウム・トレメンス（ベルギー）', desc: 'ピンクの象がトレードマーク。世界最優秀ビール受賞歴のあるトリペル。600円前後。' },
               { name: 'シエラネバダ ペールエール（米国）', desc: 'アメリカンクラフトの原点。1980年からあるカスケードホップ全開の傑作。500円前後。' },
             ].map((b) => (
-              <div key={b.name} className="text-xs flex gap-2 p-2.5 rounded" style={{ background: 'rgba(160,116,26,0.05)' }}>
-                <span className="font-bold shrink-0 w-44" style={{ color: '#A0741A' }}>{b.name}</span>
-                <span className="text-muted">{b.desc}</span>
+              <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(160,116,26,0.05)' }}>
+                <div className="flex gap-2">
+                  <span className="font-bold shrink-0 w-44" style={{ color: '#A0741A' }}>{b.name}</span>
+                  <span className="text-muted">{b.desc}</span>
+                </div>
+                <AffiliateLinks keyword={b.name} />
               </div>
             ))}
           </div>
@@ -469,6 +476,7 @@ export default function BeerBasicsPage() {
               <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(165,45,53,0.05)', border: '1px solid rgba(165,45,53,0.12)' }}>
                 <div className="font-bold mb-0.5" style={{ color: '#A52D35' }}>{b.name}</div>
                 <div className="text-muted">{b.desc}</div>
+                <AffiliateLinks keyword={b.name} />
               </div>
             ))}
           </div>

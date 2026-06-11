@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import ArticleMeta from '@/components/ArticleMeta';
+import AffiliateLinks from '@/components/AffiliateLinks';
 
 export const metadata = {
   title: 'ウイスキーの基礎知識 - 5大産地・樽・飲み方・ジャパニーズ完全ガイド',
@@ -406,9 +407,12 @@ export default function WhiskyBasicsPage() {
               { name: 'ジャックダニエル ブラック', desc: 'テネシーウイスキーの代表。チャコールメロウイング製法による独特のなめらかさ。2,500円〜。' },
               { name: 'メーカーズマーク', desc: '赤い封蝋が目印のバーボン。冬小麦使用でやわらかな甘さ。3,000円〜。' },
             ].map((b) => (
-              <div key={b.name} className="text-xs flex gap-2 p-2.5 rounded" style={{ background: 'rgba(139,105,20,0.04)' }}>
-                <span className="font-bold shrink-0 w-40" style={{ color: '#8B6914' }}>{b.name}</span>
-                <span className="text-muted">{b.desc}</span>
+              <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(139,105,20,0.04)' }}>
+                <div className="flex gap-2">
+                  <span className="font-bold shrink-0 w-40" style={{ color: '#8B6914' }}>{b.name}</span>
+                  <span className="text-muted">{b.desc}</span>
+                </div>
+                <AffiliateLinks keyword={b.name} />
               </div>
             ))}
           </div>
@@ -426,9 +430,12 @@ export default function WhiskyBasicsPage() {
               { name: 'サントリー 白州', desc: '南アルプスの森林を思わせる爽やかさ。ハイボールが特に絶妙。9,000円〜（NA）。' },
               { name: 'イチローズモルト＆グレーン ホワイトラベル', desc: 'ベンチャーウイスキー（埼玉・秩父）の人気ブレンド。複雑な味わいで国際的に高評価。5,000円〜。' },
             ].map((b) => (
-              <div key={b.name} className="text-xs flex gap-2 p-2.5 rounded" style={{ background: 'rgba(184,134,11,0.04)' }}>
-                <span className="font-bold shrink-0 w-40" style={{ color: '#B8860B' }}>{b.name}</span>
-                <span className="text-muted">{b.desc}</span>
+              <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(184,134,11,0.04)' }}>
+                <div className="flex gap-2">
+                  <span className="font-bold shrink-0 w-40" style={{ color: '#B8860B' }}>{b.name}</span>
+                  <span className="text-muted">{b.desc}</span>
+                </div>
+                <AffiliateLinks keyword={b.name} />
               </div>
             ))}
           </div>
@@ -450,6 +457,7 @@ export default function WhiskyBasicsPage() {
               <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(165,45,53,0.05)', border: '1px solid rgba(165,45,53,0.12)' }}>
                 <div className="font-bold mb-0.5" style={{ color: '#A52D35' }}>{b.name}</div>
                 <div className="text-muted">{b.desc}</div>
+                <AffiliateLinks keyword={b.name} />
               </div>
             ))}
           </div>

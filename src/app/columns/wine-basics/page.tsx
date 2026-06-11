@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import ArticleMeta from '@/components/ArticleMeta';
+import AffiliateLinks from '@/components/AffiliateLinks';
 
 export const metadata = {
   title: 'ワインの基礎知識 - 種類・ブドウ品種・産地・テイスティングまで',
@@ -217,9 +218,12 @@ export default function WineBasicsPage() {
               { name: '甲州 グレイス（中央葡萄酒・日本）', desc: '山梨甲州の最高峰の一つ。和食との相性は世界トップクラス。3,000円台。' },
               { name: 'マンズワイン ソラリス（日本）', desc: 'マンズワインの上位ライン。長野の信濃リースリングや小諸メルローなど多彩なラインナップ。' },
             ].map((b) => (
-              <div key={b.name} className="text-xs flex gap-2 p-2.5 rounded" style={{ background: 'rgba(165,45,53,0.04)' }}>
-                <span className="font-bold shrink-0 w-44" style={{ color: '#A52D35' }}>{b.name}</span>
-                <span className="text-muted">{b.desc}</span>
+              <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(165,45,53,0.04)' }}>
+                <div className="flex gap-2">
+                  <span className="font-bold shrink-0 w-44" style={{ color: '#A52D35' }}>{b.name}</span>
+                  <span className="text-muted">{b.desc}</span>
+                </div>
+                <AffiliateLinks keyword={b.name} />
               </div>
             ))}
           </div>
@@ -238,9 +242,12 @@ export default function WineBasicsPage() {
               { name: 'シャトー・メルシャン 桔梗ヶ原メルロー（日本）', desc: '長野・桔梗ヶ原の日本ワインの代表格。世界的に評価された日本産メルロー。5,000円台。' },
               { name: '中央葡萄酒 グレイス キュヴェ三澤 明野甲州', desc: 'IWC（インターナショナル・ワイン・チャレンジ）金賞受賞の名門甲州。5,000円台。' },
             ].map((b) => (
-              <div key={b.name} className="text-xs flex gap-2 p-2.5 rounded" style={{ background: 'rgba(139,105,20,0.04)' }}>
-                <span className="font-bold shrink-0 w-44" style={{ color: '#8B6914' }}>{b.name}</span>
-                <span className="text-muted">{b.desc}</span>
+              <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(139,105,20,0.04)' }}>
+                <div className="flex gap-2">
+                  <span className="font-bold shrink-0 w-44" style={{ color: '#8B6914' }}>{b.name}</span>
+                  <span className="text-muted">{b.desc}</span>
+                </div>
+                <AffiliateLinks keyword={b.name} />
               </div>
             ))}
           </div>
@@ -263,6 +270,7 @@ export default function WineBasicsPage() {
               <div key={b.name} className="text-xs p-2.5 rounded" style={{ background: 'rgba(165,45,53,0.05)', border: '1px solid rgba(165,45,53,0.12)' }}>
                 <div className="font-bold mb-0.5" style={{ color: '#A52D35' }}>{b.name}</div>
                 <div className="text-muted">{b.desc}</div>
+                <AffiliateLinks keyword={b.name} />
               </div>
             ))}
           </div>
