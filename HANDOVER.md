@@ -3,7 +3,98 @@
 > **新PCのClaude Codeへの指示**：
 > このドキュメントを最初に読んで、プロジェクトの全文脈・履歴・現状・進行中タスクを理解してください。
 > 「HANDOVER.md を読んで状況を理解して」とユーザーから言われたら、このファイルを最初に開いてください。
-> 完了後は、続きから作業を再開できる状態にすること。
+>
+> まず下記「🚚 新PCでの復元フロー」セクションを参照し、ユーザーが必要な復元ステップを完了しているか確認してください。
+> 未完了のステップがあれば、コマンドベースで案内してください。
+> 復元完了後は、後半の「📍 現在進行中: Phase E」の続きから作業を再開すること。
+
+---
+
+## 🚚 新PCでの復元フロー
+
+このプロジェクトはフォルダ1つで完結する設計です。新PCで以下を順番に実行してください。
+
+### Step 1: 必要なツールをインストール
+
+| ツール | 用途 | 確認コマンド |
+|---|---|---|
+| **Node.js 18+** | アプリ実行 | `node -v` |
+| **Git** | バージョン管理 | `git --version` |
+| **GitHub CLI (gh)** | GitHub認証 | `gh --version` |
+
+### Step 2: プロジェクトフォルダを新PCに配置
+
+旧PCからフォルダごとコピー済みの場合：
+```bash
+cd /path/to/酒
+```
+
+GitHubから clone する場合（`secrets/` と `.claude/conversation-archive/` は別途復元が必要）：
+```bash
+git clone https://github.com/yosuke-34/sake-log.git
+cd sake-log
+```
+
+### Step 3: 環境変数を復元
+
+```bash
+# 旧PCからコピーした secrets/ があれば
+cp secrets/env.local.backup.txt .env.local
+
+# 無い場合は .env.local.example を参考に手動で .env.local を作成
+# 必要な値: NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY
+# 取得元: Vercel Dashboard → Project Settings → Environment Variables
+```
+
+### Step 4: 依存関係をインストール
+
+```bash
+npm install
+```
+
+### Step 5: GitHub 認証
+
+```bash
+gh auth login
+# プロンプトに従ってブラウザで認証
+# 重要: yosuke-34 アカウントを選ぶ（push権限あり）
+# 副アカウント okamoto052 は push 不可なので使わない
+```
+
+複数アカウントがある場合の切替：
+```bash
+gh auth switch --user yosuke-34
+```
+
+### Step 6: 動作確認
+
+```bash
+# 開発サーバー起動
+npm run dev
+# → http://localhost:3000 でアクセス
+
+# 本番ビルド検証
+npm run build
+# → エラーなく21ページ生成されればOK
+```
+
+### Step 7: Claude Code の引継ぎ
+
+このファイル（HANDOVER.md）を最初に読み込めば全文脈が引き継がれます。
+詳細な過去の対話履歴が必要な場合のみ `.claude/conversation-archive/` を参照してください。
+
+### 復元完了チェックリスト
+
+- [ ] `node -v` が 18 以上
+- [ ] `.env.local` が存在し、Supabase の値が入っている
+- [ ] `npm install` がエラーなく完了
+- [ ] `npm run dev` が起動し、ホームページが表示される
+- [ ] `/calendar` でカレンダーが表示される（年齢確認モーダル経由）
+- [ ] `/columns/sake-basics` で楽天・Amazonボタンが表示される
+- [ ] `gh auth status` で yosuke-34 がアクティブ
+- [ ] `git push origin master` が（ダミーコミットで）成功する
+
+すべて通れば復元完了。下記の「📍 現在進行中: Phase E」から作業再開してください。
 
 ---
 
@@ -276,13 +367,7 @@ gh auth switch --user yosuke-34
 
 ---
 
-## ✅ 引越し完了チェック（新PCで動作確認時）
+## ✅ 復元の動作確認
 
-- [ ] `npm install` が成功する
-- [ ] `npm run build` がエラーなく完了する
-- [ ] `npm run dev` でサーバー起動、http://localhost:3000 が表示される
-- [ ] `/calendar` でカレンダーが動作する（年齢確認モーダル経由）
-- [ ] `/columns/sake-basics` で楽天・Amazonボタンが表示される
-- [ ] `git push origin master` が成功する（GitHub認証）
-
-すべて通れば引越し完了。続きから作業を再開できます。
+新PCでの復元動作確認は、冒頭の「🚚 新PCでの復元フロー → Step 6: 動作確認」および
+「復元完了チェックリスト」を参照してください。
