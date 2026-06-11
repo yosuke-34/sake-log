@@ -1,24 +1,66 @@
 {
-  "name": "酒ログ - お酒の記録帳",
+  "name": "酒ログ - お酒の記録帳とコラム",
   "short_name": "酒ログ",
-  "description": "飲んだお酒を記録するアプリ",
+  "description": "飲んだお酒をカレンダーで記録できる無料アプリ。日本酒・ウイスキー・ビール・焼酎・ワインの基礎知識や人気銘柄ガイド、料理とのマリアージュ、二日酔いケアなどお酒の楽しみ方を深める情報も豊富。",
+  "id": "/",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "background_color": "#FAF5EF",
   "theme_color": "#C53D43",
   "orientation": "portrait",
+  "lang": "ja",
+  "dir": "ltr",
+  "categories": ["food", "lifestyle", "social"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "カレンダー記録",
+      "short_name": "記録",
+      "description": "今日飲んだお酒を記録",
+      "url": "/calendar",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "新規記録を追加",
+      "short_name": "追加",
+      "description": "新しいお酒の記録を追加",
+      "url": "/add",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "お酒コラム",
+      "short_name": "コラム",
+      "description": "お酒の知識・銘柄ガイド",
+      "url": "/columns",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
     }
   ],
   "share_target": {
